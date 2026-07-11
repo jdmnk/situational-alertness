@@ -3,7 +3,16 @@ export default function Hero({ meta, industries }) {
   return (
     <header className="mx-auto max-w-6xl px-4 pb-8 pt-12 sm:px-6 sm:pt-16">
       <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500">
-        {jobCount} jobs · {industries.length} industries · updated {meta.updated} · v{meta.version}
+        {jobCount} jobs · {industries.length} industries · updated {meta.updated} · v{meta.version}{' '}
+        ·{' '}
+        <a
+          href="https://github.com/jdmnk/situational-alertness"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-neutral-800"
+        >
+          GitHub ↗
+        </a>
       </p>
       <h1 className="mt-3 max-w-3xl font-serif text-4xl font-bold leading-tight sm:text-5xl">
         {meta.title}

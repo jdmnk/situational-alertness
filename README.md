@@ -1,4 +1,6 @@
-# AI Economic Impact Map (sitprep)
+# Situational Alertness — AI Economic Impact Map
+
+**Live: https://jdmnk.github.io/situational-alertness/**
 
 An interactive single-page site that maps how AI affects the economy, top-down:
 **economy → industries → jobs**, each colored by one of five fates —

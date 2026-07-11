@@ -17,6 +17,15 @@ export default function Footer({ meta }) {
             className="underline underline-offset-2 hover:text-neutral-800"
           >
             sources (JSON)
+          </a>{' '}
+          ·{' '}
+          <a
+            href="https://github.com/jdmnk/situational-alertness"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-neutral-800"
+          >
+            source on GitHub
           </a>
         </p>
         <p className="mt-3 text-xs text-neutral-400">

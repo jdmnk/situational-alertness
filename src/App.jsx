@@ -92,19 +92,15 @@ export default function App() {
   )
   const isMatch = useCallback(
     (job) => {
-      // Fate categories filter only in the fate lens; channels only in the SO lens.
-      if (view.lens === 'so') {
-        if (view.chans && !(job.second_order_channels || []).some((c) => view.chans.includes(c)))
-          return false
-      } else if (!catActive(job.category)) {
+      if (!catActive(job.category)) return false
+      if (view.chans && !(job.second_order_channels || []).some((c) => view.chans.includes(c)))
         return false
-      }
       return (
         timeActive(job.timeline) &&
         (!view.q || job.name.toLowerCase().includes(view.q.toLowerCase()))
       )
     },
-    [catActive, timeActive, view.q, view.lens, view.chans],
+    [catActive, timeActive, view.q, view.chans],
   )
 
   const toggleCat = useCallback(
@@ -155,13 +151,6 @@ export default function App() {
     [allChanKeys],
   )
 
-  const setLens = useCallback(
-    (patch) => {
-      if (patch.lens && patch.lens !== view.lens) track('lens_changed', { lens: patch.lens })
-      update(patch)
-    },
-    [update, view.lens],
-  )
 
   // Close the detail panel with Escape.
   useEffect(() => {
@@ -208,14 +197,13 @@ export default function App() {
               chanActive={chanActive}
               onToggleCat={toggleCat}
               onToggleChan={toggleChan}
-              onUpdate={setLens}
+              onUpdate={update}
             />
           </div>
           {!isMobile && (
             <EconomyStrip
               industries={sortedIndustries}
               meta={data.meta}
-              lens={view.lens}
               focusId={view.industry}
               onJump={focusIndustry}
             />
@@ -223,7 +211,6 @@ export default function App() {
           <Board
             industries={sortedIndustries}
             meta={data.meta}
-            lens={view.lens}
             isMatch={isMatch}
             selectedJobId={view.job}
             focusId={view.industry}
@@ -233,15 +220,12 @@ export default function App() {
           />
         </section>
 
-        <SecondWave
+        <SecondWave meta={data.meta} industries={data.industries} />
+        <HowToRead
+          categories={categories}
           meta={data.meta}
-          industries={data.industries}
-          onOpenLens={() => {
-            setLens({ lens: 'so' })
-            document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' })
-          }}
+          rangeNote={data.meta.scoring.range_note}
         />
-        <HowToRead categories={categories} rangeNote={data.meta.scoring.range_note} />
         <Methodology />
         <Sources sources={sources} />
       </main>

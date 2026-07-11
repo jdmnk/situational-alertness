@@ -1,34 +1,35 @@
 import { useEffect, useRef } from 'react'
 import { categoryForScore, industrySoLevel, textColorFor } from '../lib/data'
 
-function JobTile({ job, meta, lens, match, selected, onClick }) {
+// One tile, both dimensions, no clicking required:
+//   background color + score  = direct automation (how much)
+//   small glyphs after score  = the mechanisms (why, direct)
+//   colored right badge       = indirect exposure level + its channels (why, indirect)
+function JobTile({ job, meta, match, selected, onClick }) {
   const categories = meta.scoring.categories
   const soLevels = meta.scoring.second_order_levels || {}
   const channels = meta.second_order_channels || {}
-  const soLens = lens === 'so'
-  const color = soLens
-    ? (soLevels[job.second_order_risk]?.color ?? '#999')
-    : categories[job.category].color
+  const mechs = meta.mechanisms || {}
+
+  const color = categories[job.category].color
   const fg = textColorFor(color)
-  // Stripes mark demand-side risk in the fate lens; redundant under the SO lens.
-  const stripes =
-    !soLens && job.second_order_risk === 'high'
-      ? fg === '#ffffff'
-        ? 'stripes-light'
-        : 'stripes-dark'
-      : ''
   const jobChans = job.second_order_channels || []
-  const title = soLens
-    ? `${job.name} — ${job.second_order_risk} indirect exposure${
-        jobChans.length ? ': ' + jobChans.map((c) => channels[c]?.label ?? c).join(', ') : ''
-      }`
-    : `${job.name} — ${job.score} (${categories[job.category].label})${
-        job.second_order_risk === 'high' ? ' · high demand-side risk' : ''
-      }`
+  const risk = job.second_order_risk
+  const showBadge = jobChans.length > 0 || risk !== 'low'
+  const soColor = soLevels[risk]?.color ?? '#999'
+
+  const mechLabels = job.mechanisms.map((m) => mechs[m]?.label ?? m).join(', ')
+  const chanLabels = jobChans.map((c) => channels[c]?.label ?? c).join(', ')
+  const title =
+    `${job.name} — automation ${job.score} (${categories[job.category].label})` +
+    (mechLabels ? `. Why: ${mechLabels}` : '') +
+    `. Indirect exposure: ${risk}` +
+    (chanLabels ? ` via ${chanLabels}` : '')
+
   return (
     <button
       onClick={onClick}
-      className={`rounded-lg px-3 py-2 text-left text-[13px] font-semibold leading-snug transition hover:brightness-110 ${stripes}`}
+      className="rounded-lg px-3 py-2 text-left text-[13px] font-semibold leading-snug transition hover:brightness-110"
       style={{
         backgroundColor: color,
         color: fg,
@@ -44,15 +45,20 @@ function JobTile({ job, meta, lens, match, selected, onClick }) {
       aria-label={title + '. Click for details.'}
     >
       {job.name}
-      {!soLens && job.second_order_risk === 'high' && <span aria-hidden> ⚠</span>}
-      {soLens ? (
-        jobChans.length > 0 && (
-          <span className="ml-1.5 font-normal" aria-hidden>
-            {jobChans.map((c) => channels[c]?.glyph ?? '').join('')}
-          </span>
-        )
-      ) : (
-        <span className="ml-1.5 font-normal opacity-75">{job.score}</span>
+      <span className="ml-1.5 font-normal opacity-75">{job.score}</span>
+      {job.mechanisms.length > 0 && (
+        <span className="ml-1 font-normal opacity-70" aria-hidden>
+          {job.mechanisms.map((m) => mechs[m]?.glyph ?? '').join('')}
+        </span>
+      )}
+      {showBadge && (
+        <span
+          className="ml-1.5 inline-flex translate-y-[-1px] items-center rounded-full px-1.5 py-px align-middle text-[11px] font-semibold"
+          style={{ backgroundColor: soColor, color: textColorFor(soColor) }}
+          aria-hidden
+        >
+          {jobChans.length ? jobChans.map((c) => channels[c]?.glyph ?? '').join('') : risk}
+        </span>
       )}
     </button>
   )
@@ -61,7 +67,6 @@ function JobTile({ job, meta, lens, match, selected, onClick }) {
 export default function Board({
   industries,
   meta,
-  lens,
   isMatch,
   selectedJobId,
   focusId,
@@ -71,7 +76,6 @@ export default function Board({
 }) {
   const categories = meta.scoring.categories
   const soLevels = meta.scoring.second_order_levels || {}
-  const soLens = lens === 'so'
   const sectionRefs = useRef({})
 
   // Opening a section (strip click, header, or #i= deep link) scrolls it under
@@ -86,10 +90,9 @@ export default function Board({
   return (
     <div className="space-y-3">
       {industries.map((ind) => {
+        const color = categories[categoryForScore(ind.overall_score, categories)].color
         const soLevel = industrySoLevel(ind)
-        const color = soLens
-          ? (soLevels[soLevel]?.color ?? '#999')
-          : categories[categoryForScore(ind.overall_score, categories)].color
+        const soColor = soLevels[soLevel]?.color ?? '#999'
         const allJobs = [...ind.jobs].sort((a, b) => b.score - a.score)
         const matches = ind.jobs.filter(isMatch).length
         // While searching, sections with hits reveal just those tiles; the
@@ -128,48 +131,33 @@ export default function Board({
                   className="mt-1.5 flex h-1.5 w-full max-w-xs overflow-hidden rounded-full"
                   aria-hidden
                 >
-                  {soLens
-                    ? Object.entries(soLevels).map(([key, lvl]) => {
-                        const n = ind.jobs.filter((j) => j.second_order_risk === key).length
-                        if (!n) return null
-                        return (
-                          <span
-                            key={key}
-                            style={{ backgroundColor: lvl.color, flexGrow: n }}
-                            className="h-full"
-                          />
-                        )
-                      })
-                    : Object.entries(categories).map(([key, c]) => {
-                        const n = ind.jobs.filter((j) => j.category === key).length
-                        if (!n) return null
-                        return (
-                          <span
-                            key={key}
-                            style={{ backgroundColor: c.color, flexGrow: n }}
-                            className="h-full"
-                          />
-                        )
-                      })}
+                  {Object.entries(categories).map(([key, c]) => {
+                    const n = ind.jobs.filter((j) => j.category === key).length
+                    if (!n) return null
+                    return (
+                      <span
+                        key={key}
+                        style={{ backgroundColor: c.color, flexGrow: n }}
+                        className="h-full"
+                      />
+                    )
+                  })}
                 </span>
               </span>
-              {soLens ? (
-                <span
-                  className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
-                  style={{ backgroundColor: color, color: textColorFor(color) }}
-                  title={`${soLevels[soLevel]?.label ?? soLevel} (aggregated from jobs)`}
-                >
-                  {soLevel}
-                </span>
-              ) : (
-                <span
-                  className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
-                  style={{ backgroundColor: color, color: textColorFor(color) }}
-                  title={`Overall score ${ind.overall_score}`}
-                >
-                  {ind.overall_score}
-                </span>
-              )}
+              <span
+                className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
+                style={{ backgroundColor: color, color: textColorFor(color) }}
+                title={`Overall automation score ${ind.overall_score}`}
+              >
+                {ind.overall_score}
+              </span>
+              <span
+                className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
+                style={{ backgroundColor: soColor, color: textColorFor(soColor) }}
+                title={`${soLevels[soLevel]?.label ?? soLevel} (aggregated from jobs)`}
+              >
+                indirect: {soLevel}
+              </span>
               <span className="shrink-0 text-neutral-400" aria-hidden>
                 {expanded ? '−' : '+'}
               </span>
@@ -188,7 +176,6 @@ export default function Board({
                       key={job.id}
                       job={job}
                       meta={meta}
-                      lens={lens}
                       match={isMatch(job)}
                       selected={selectedJobId === job.id}
                       onClick={() => onSelectJob(job.id, ind.id)}

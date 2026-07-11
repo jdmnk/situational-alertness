@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AI Economic Impact Map",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "updated": "2026-07-11",
     "description": "Hierarchical dataset of industries and occupations with AI impact assessments. Scores are editorial estimates synthesized from cited research (see sources) plus a mechanism-based framework (verification speed, artifact-vs-outcome work, demand-side second-order effects). Intended for a zoomable tree/icicle visualization.",
     "scoring": {
@@ -53,16 +53,56 @@
       }
     },
     "mechanisms": {
-      "artifact_production": "Work defined by producing artifacts from specs (code, copy, reports, designs) - fastest to automate.",
-      "fast_verification": "Output is cheaply checkable (code runs, tests pass) - automates first.",
-      "slow_verification": "System-level or real-world verification - automates later.",
-      "accountability_shield": "A human must legally/institutionally answer for outcomes (liability, regulation, certification).",
-      "atoms": "Physical-world work; robotics lag protects it ~10-20 years.",
-      "human_premium": "Value is constitutively human (presence, care, status, witness, trust).",
-      "demand_collapse": "Job is automatable-proof but customer income is not - second-order exposure.",
-      "jevons": "Cheaper output expands total demand, partially offsetting displacement.",
-      "trust_scarcity": "AI flood makes verification/authenticity scarce and valuable - growth driver.",
-      "bottleneck_owner": "Sits on a physical/legal bottleneck (energy, land, permits, compute) - value accrues here."
+      "artifact_production": {
+        "label": "Artifact production",
+        "glyph": "📄",
+        "description": "Work defined by producing artifacts from specs (code, copy, reports, designs) - fastest to automate."
+      },
+      "fast_verification": {
+        "label": "Fast verification",
+        "glyph": "⚡",
+        "description": "Output is cheaply checkable (code runs, tests pass) - automates first."
+      },
+      "slow_verification": {
+        "label": "Slow verification",
+        "glyph": "⏳",
+        "description": "System-level or real-world verification - automates later."
+      },
+      "accountability_shield": {
+        "label": "Accountability shield",
+        "glyph": "🛡️",
+        "description": "A human must legally/institutionally answer for outcomes (liability, regulation, certification)."
+      },
+      "atoms": {
+        "label": "Physical work",
+        "glyph": "🔧",
+        "description": "Physical-world work; robotics lag protects it ~10-20 years."
+      },
+      "human_premium": {
+        "label": "Human premium",
+        "glyph": "🤝",
+        "description": "Value is constitutively human (presence, care, status, witness, trust)."
+      },
+      "demand_collapse": {
+        "label": "Demand exposure",
+        "glyph": "💸",
+        "description": "Job is automatable-proof but customer income is not - second-order exposure."
+      },
+      "jevons": {
+        "label": "Jevons offset",
+        "glyph": "📈",
+        "description": "Cheaper output expands total demand, partially offsetting displacement."
+      },
+      "trust_scarcity": {
+        "label": "Trust scarcity",
+        "glyph": "✅",
+        "description": "AI flood makes verification/authenticity scarce and valuable - growth driver."
+      },
+      "bottleneck_owner": {
+        "label": "Bottleneck owner",
+        "glyph": "🗝️",
+        "description": "Sits on a physical/legal bottleneck (energy, land, permits, compute) - value accrues here."
+      }
     },
     "second_order_channels": {
       "demand_collapse": {

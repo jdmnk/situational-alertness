@@ -8,7 +8,9 @@ const FATE_LINES = {
   growing: 'demand for this work is created or expanded by AI.',
 }
 
-export default function HowToRead({ categories, rangeNote }) {
+export default function HowToRead({ categories, meta, rangeNote }) {
+  const mechs = meta?.mechanisms || {}
+  const channels = meta?.second_order_channels || {}
   return (
     <section id="how-to-read" className="mt-16 scroll-mt-4">
       <h2 className="font-serif text-2xl font-bold">How to read this</h2>
@@ -36,19 +38,46 @@ export default function HowToRead({ categories, rangeNote }) {
           {rangeNote && <p className="mt-2 text-xs text-neutral-400">{rangeNote}</p>}
 
           <h3 className="mt-6 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            Extra marks
+            On every tile
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li className="flex items-start gap-2.5">
               <span
-                className="stripes-light mt-0.5 inline-block h-5 w-14 shrink-0 rounded"
+                className="mt-0.5 inline-block h-5 w-14 shrink-0 rounded"
                 style={{ backgroundColor: '#27ae60' }}
                 aria-hidden
               />
               <span>
-                <strong>Striped</strong> — safe from automation, high <em>indirect</em> exposure:
-                customers&rsquo; income, worker influx, office vacancy (see &ldquo;The second
-                wave&rdquo;). Also marked ⚠.
+                <strong>Fill color + number</strong> — the direct automation fate and score.
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="mt-0.5 inline-block w-14 shrink-0 text-center text-sm" aria-hidden>
+                📄⚡
+              </span>
+              <span>
+                <strong>Small icons</strong> — <em>why</em>, directly:{' '}
+                {Object.values(mechs)
+                  .map((m) => `${m.glyph} ${m.label.toLowerCase()}`)
+                  .join(' · ')}
+                .
+              </span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span
+                className="mt-0.5 inline-flex h-5 w-14 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
+                style={{ backgroundColor: '#c0392b', color: '#fff' }}
+                aria-hidden
+              >
+                💸🔀
+              </span>
+              <span>
+                <strong>Badge</strong> — <em>why, indirectly</em>: green/yellow/red for how hard
+                the second wave hits, icons for the channel:{' '}
+                {Object.values(channels)
+                  .map((c) => `${c.glyph} ${c.label.toLowerCase()}`)
+                  .join(' · ')}
+                .
               </span>
             </li>
             <li className="flex items-start gap-2.5">
@@ -81,10 +110,11 @@ export default function HowToRead({ categories, rangeNote }) {
               deciding, verifying, being accountable — is amplified.
             </li>
             <li>
-              <strong>Striped cells are the demand-side story.</strong> A job can be
-              automation-proof while its customers are automation-exposed. A barista&rsquo;s
-              risk isn&rsquo;t a robot — it&rsquo;s a neighborhood that can no longer afford
-              coffee.
+              <strong>The badges are the second-wave story.</strong> A job can be
+              automation-proof while its customers, colleagues-to-be, or funders are
+              automation-exposed. A barista&rsquo;s risk isn&rsquo;t a robot — it&rsquo;s a
+              neighborhood that can no longer afford coffee. Green tile, red badge: the
+              map&rsquo;s most important pattern.
             </li>
           </ol>
         </div>

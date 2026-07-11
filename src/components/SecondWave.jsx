@@ -18,7 +18,7 @@ function ChannelCard({ ch, examples }) {
   )
 }
 
-export default function SecondWave({ meta, industries, onOpenLens }) {
+export default function SecondWave({ meta, industries }) {
   const channels = meta.second_order_channels || {}
   if (!Object.keys(channels).length) return null
 
@@ -62,16 +62,11 @@ export default function SecondWave({ meta, industries, onOpenLens }) {
         </div>
       </div>
 
-      <p className="mt-5 text-sm text-neutral-700">
-        <button
-          onClick={onOpenLens}
-          className="font-semibold underline decoration-neutral-400 underline-offset-2 hover:decoration-neutral-900"
-        >
-          Flip the map to the second-order lens ↑
-        </button>{' '}
-        — it recolors every job by indirect exposure only, and the map inverts: software goes
-        calm (its pain is direct and already priced in), while the &ldquo;safe&rdquo; green
-        trades and service jobs light up.
+      <p className="mt-5 max-w-3xl text-sm text-neutral-700">
+        On the map, every job carries this as a small colored badge — green, yellow or red for
+        how hard the second wave hits, with the channel icons saying why. A green tile with a
+        red badge is the map&rsquo;s most important pattern: safe from the robots, exposed to
+        everything downstream of them.
       </p>
     </section>
   )

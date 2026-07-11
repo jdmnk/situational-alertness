@@ -109,16 +109,22 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
             Mechanisms
           </h4>
           <ul className="mt-2 space-y-2">
-            {job.mechanisms.map((m) => (
-              <li key={m} className="text-sm">
-                <span className="font-semibold">{mechanismLabel(m)}</span>
-                {meta.mechanisms[m] && (
-                  <span className="block text-xs leading-snug text-neutral-500">
-                    {meta.mechanisms[m]}
+            {job.mechanisms.map((m) => {
+              const mech = meta.mechanisms[m]
+              return (
+                <li key={m} className="text-sm">
+                  <span className="font-semibold">
+                    {mech?.glyph && <span aria-hidden>{mech.glyph} </span>}
+                    {mech?.label ?? mechanismLabel(m)}
                   </span>
-                )}
-              </li>
-            ))}
+                  {mech?.description && (
+                    <span className="block text-xs leading-snug text-neutral-500">
+                      {mech.description}
+                    </span>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}

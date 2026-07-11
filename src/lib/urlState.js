@@ -9,7 +9,6 @@ export const DEFAULT_STATE = {
   times: null, // null = all timelines active
   sort: 'score', // 'score' (worst-hit first) | 'alpha'
   q: '', // job-name search
-  lens: 'fate', // 'fate' (automation fate) | 'so' (second-order exposure)
   chans: null, // null = all second-order channels, else array of active keys
 }
 
@@ -22,7 +21,6 @@ export function parseHash(hash) {
     times: p.get('t') ? p.get('t').split(',').filter(Boolean) : null,
     sort: p.get('s') === 'alpha' ? 'alpha' : 'score',
     q: p.get('q') || '',
-    lens: p.get('l') === 'so' ? 'so' : 'fate',
     chans: p.get('x') ? p.get('x').split(',').filter(Boolean) : null,
   }
 }
@@ -36,7 +34,6 @@ export function serializeHash(state) {
   if (state.times) parts.push('t=' + state.times.map(encodeURIComponent).join(','))
   if (state.sort !== 'score') parts.push('s=' + state.sort)
   if (state.q) parts.push('q=' + encodeURIComponent(state.q))
-  if (state.lens !== 'fate') parts.push('l=' + state.lens)
   if (state.chans) parts.push('x=' + state.chans.map(encodeURIComponent).join(','))
   return parts.join('&')
 }

@@ -11,9 +11,7 @@ export default function Controls({
   onToggleChan,
   onUpdate,
 }) {
-  const soLevels = meta.scoring.second_order_levels || {}
   const channels = meta.second_order_channels || {}
-  const soLens = view.lens === 'so'
 
   const toggleTime = (t) => {
     const active = new Set(view.times ?? TIMELINES)
@@ -25,65 +23,25 @@ export default function Controls({
   return (
     <div className="space-y-2.5">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5">
-        {/* Lens switch */}
-        <div
-          className="flex overflow-hidden rounded-full border border-neutral-300 text-xs font-semibold"
-          role="group"
-          aria-label="Map lens"
-        >
-          <button
-            onClick={() => onUpdate({ lens: 'fate' })}
-            aria-pressed={!soLens}
-            className={`px-3 py-1 transition ${!soLens ? 'bg-neutral-800 text-white' : 'text-neutral-500 hover:text-neutral-800'}`}
-          >
-            Automation fate
-          </button>
-          <button
-            onClick={() => onUpdate({ lens: 'so' })}
-            aria-pressed={soLens}
-            className={`px-3 py-1 transition ${soLens ? 'bg-neutral-800 text-white' : 'text-neutral-500 hover:text-neutral-800'}`}
-          >
-            Second-order lens
-          </button>
-        </div>
-
-        {soLens ? (
-          <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-600">
-            {Object.entries(soLevels).map(([key, lvl]) => (
-              <span key={key} className="inline-flex items-center gap-1.5">
-                <span
-                  className="inline-block h-3 w-3 rounded-full"
-                  style={{ backgroundColor: lvl.color }}
-                  aria-hidden
-                />
+        <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by fate">
+          {Object.entries(categories).map(([key, cat]) => {
+            const active = catActive(key)
+            return (
+              <button
+                key={key}
+                onClick={() => onToggleCat(key)}
+                aria-pressed={active}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                  active ? '' : 'bg-neutral-200 text-neutral-400 line-through'
+                }`}
+                style={active ? { backgroundColor: cat.color, color: textColorFor(cat.color) } : undefined}
+                title={cat.label}
+              >
                 {key}
-              </span>
-            ))}
-            <span className="text-neutral-400">
-              indirect exposure — automation of the job itself is ignored here
-            </span>
-          </div>
-        ) : (
-          <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by fate">
-            {Object.entries(categories).map(([key, cat]) => {
-              const active = catActive(key)
-              return (
-                <button
-                  key={key}
-                  onClick={() => onToggleCat(key)}
-                  aria-pressed={active}
-                  className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
-                    active ? '' : 'bg-neutral-200 text-neutral-400 line-through'
-                  }`}
-                  style={active ? { backgroundColor: cat.color, color: textColorFor(cat.color) } : undefined}
-                  title={cat.label}
-                >
-                  {key}
-                </button>
-              )
-            })}
-          </div>
-        )}
+              </button>
+            )
+          })}
+        </div>
 
         <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by timeline">
           {TIMELINES.map((t) => {
@@ -128,10 +86,9 @@ export default function Controls({
         </div>
       </div>
 
-      {/* Channel filter, only meaningful under the second-order lens */}
-      {soLens && (
+      {Object.keys(channels).length > 0 && (
         <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by second-order channel">
-          <span className="text-xs text-neutral-400">Channels:</span>
+          <span className="text-xs text-neutral-400">Indirect channels:</span>
           {Object.entries(channels).map(([key, ch]) => {
             const active = chanActive(key)
             return (

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { categoryForScore, textColorFor } from '../lib/data'
 
 function JobTile({ job, categories, match, selected, onClick }) {
@@ -45,40 +45,32 @@ export default function Board({
   focusId,
   onSelectJob,
   onFocus,
-  accordion,
+  revealMatches,
 }) {
   const categories = meta.scoring.categories
-  const [collapsed, setCollapsed] = useState(() => new Set())
   const sectionRefs = useRef({})
 
-  // Desktop: a strip/hash navigation target scrolls its section into view.
+  // Opening a section (strip click, header, or #i= deep link) scrolls it under
+  // the sticky toolbar.
   useEffect(() => {
-    if (accordion || !focusId) return
+    if (!focusId) return
     sectionRefs.current[focusId]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [focusId, accordion])
+  }, [focusId])
 
-  const isExpanded = (id) => (accordion ? focusId === id : !collapsed.has(id))
-
-  const toggle = (id) => {
-    if (accordion) {
-      onFocus(isExpanded(id) ? null : id)
-    } else {
-      setCollapsed((prev) => {
-        const next = new Set(prev)
-        next.has(id) ? next.delete(id) : next.add(id)
-        return next
-      })
-    }
-  }
+  const toggle = (id) => onFocus(focusId === id ? null : id)
 
   return (
     <div className="space-y-3">
       {industries.map((ind) => {
         const cat = categoryForScore(ind.overall_score, categories)
         const color = categories[cat].color
-        const jobs = [...ind.jobs].sort((a, b) => b.score - a.score)
+        const allJobs = [...ind.jobs].sort((a, b) => b.score - a.score)
         const matches = ind.jobs.filter(isMatch).length
-        const expanded = isExpanded(ind.id)
+        // While searching, sections with hits reveal just those tiles; the
+        // accordion otherwise shows one industry at a time.
+        const opened = focusId === ind.id
+        const expanded = revealMatches ? matches > 0 || opened : opened
+        const jobs = revealMatches && !opened ? allJobs.filter(isMatch) : allJobs
         return (
           <section
             key={ind.id}
@@ -137,7 +129,7 @@ export default function Board({
 
             {expanded && (
               <div className="border-t border-neutral-100 px-4 pb-4 pt-3">
-                {!accordion && ind.summary && (
+                {opened && ind.summary && (
                   <p className="mb-3 max-w-3xl text-sm leading-relaxed text-neutral-600">
                     {ind.summary}
                   </p>

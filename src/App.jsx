@@ -174,6 +174,7 @@ export default function App() {
             <EconomyStrip
               industries={sortedIndustries}
               meta={data.meta}
+              focusId={view.industry}
               onJump={focusIndustry}
             />
           )}
@@ -185,7 +186,7 @@ export default function App() {
             focusId={view.industry}
             onSelectJob={selectJob}
             onFocus={focusIndustry}
-            accordion={isMobile}
+            revealMatches={view.q.trim().length > 0}
           />
         </section>
 

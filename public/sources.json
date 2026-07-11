@@ -47,12 +47,12 @@
       "summary": "~300M full-time-equivalent jobs exposed globally; ~25% of US work hours automatable. Office/admin support highest (46%), legal 44%, architecture/engineering 37%; physical and outdoor occupations least exposed. Exposure ≠ elimination: most affected workers see less than half their workload automated."
     },
     "goldman-2026": {
-      "title": "AI and the US labor market — 2026 update",
+      "title": "An AI Job Apocalypse? (US Economics Analyst, June 25, 2026)",
       "publisher": "Goldman Sachs",
       "year": "2026",
-      "url": "https://www.goldmansachs.com/insights",
+      "url": "https://www.goldmansachs.com/pdfs/insights/goldman-sachs-research/an-ai-job-apocalypse/report.pdf",
       "group": "Exposure & projection studies",
-      "summary": "~9% of the US workforce (~15M workers) displaced across a 10-year transition; explicitly calls a \"job apocalypse\" unlikely. Notes job creation in the power and datacenter buildout."
+      "summary": "~9% of the US workforce (~15M workers) displaced across a 10-year transition — up from the firm's earlier 6–7% estimate via a new methodology counting total worker flows out of existing jobs. Explicitly calls a \"job apocalypse\" unlikely: peak unemployment effect under one percentage point, with job creation in the power and datacenter buildout."
     },
     "imf-2024": {
       "title": "Gen-AI: Artificial Intelligence and the Future of Work",
@@ -82,7 +82,7 @@
       "title": "The Adolescence of Technology",
       "publisher": "Dario Amodei",
       "year": "2026",
-      "url": "https://www.darioamodei.com/",
+      "url": "https://darioamodei.com/essay/the-adolescence-of-technology",
       "group": "Frontier viewpoints",
       "summary": "20k-word essay doubling down: AI systems of beyond-Nobel capability possible by 2027; policy proposals including a token tax. Counterpoint noted in coverage: his 90%-of-code prediction was true inside Anthropic, 25–40% across the industry — the lab-view vs. diffusion-speed gap."
     },
@@ -90,7 +90,7 @@
       "title": "Machines of Loving Grace",
       "publisher": "Dario Amodei",
       "year": "2024",
-      "url": "https://www.darioamodei.com/essay/machines-of-loving-grace",
+      "url": "https://darioamodei.com/essay/machines-of-loving-grace",
       "group": "Frontier viewpoints",
       "summary": "The optimistic branch: compressed decades of biology and health progress. Used here as the upside-scenario source."
     },

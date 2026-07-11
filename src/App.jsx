@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { track } from './lib/analytics'
 import { findJob, validateData } from './lib/data'
 import { DEFAULT_STATE, parseHash, serializeHash } from './lib/urlState'
 import Hero from './components/Hero'
@@ -105,13 +106,23 @@ export default function App() {
   )
 
   const selectJob = useCallback(
-    (jobId, industryId) =>
+    (jobId, industryId) => {
+      if (jobId) track('job_selected', { job: jobId, industry: industryId })
       setView((v) => ({
         ...v,
         job: jobId,
         industry: jobId ? (industryId ?? v.industry) : v.industry,
-      })),
+      }))
+    },
     [],
+  )
+
+  const focusIndustry = useCallback(
+    (id) => {
+      if (id) track('industry_zoomed', { industry: id })
+      update({ industry: id })
+    },
+    [update],
   )
 
   if (error) {
@@ -158,7 +169,7 @@ export default function App() {
               selectedJobId={view.job}
               focusId={view.industry}
               onSelectJob={selectJob}
-              onFocus={(id) => update({ industry: id })}
+              onFocus={focusIndustry}
             />
           ) : (
             <div className="grid grid-cols-[1fr_320px] gap-6">
@@ -168,7 +179,7 @@ export default function App() {
                 focusId={view.industry}
                 selectedJobId={view.job}
                 isMatch={isMatch}
-                onFocus={(id) => update({ industry: id })}
+                onFocus={focusIndustry}
                 onSelectJob={selectJob}
               />
               <DetailPanel

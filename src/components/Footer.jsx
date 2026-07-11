@@ -19,6 +19,10 @@ export default function Footer({ meta }) {
             sources (JSON)
           </a>
         </p>
+        <p className="mt-3 text-xs text-neutral-400">
+          Anonymous visit counts via PostHog EU — cookieless, no cross-site tracking, no
+          personal data stored.
+        </p>
       </div>
     </footer>
   )

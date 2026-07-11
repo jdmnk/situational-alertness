@@ -1,0 +1,138 @@
+{
+  "groups": [
+    "Empirical usage & labor-market data",
+    "Exposure & projection studies",
+    "Frontier viewpoints",
+    "Secondary syntheses & project framework"
+  ],
+  "sources": {
+    "aei": {
+      "title": "Anthropic Economic Index",
+      "publisher": "Anthropic",
+      "year": "2025–2026",
+      "url": "https://www.anthropic.com/economic-index",
+      "group": "Empirical usage & labor-market data",
+      "summary": "Millions of anonymized Claude conversations mapped to O*NET tasks and occupations; open dataset. Early finding: ~36% of occupations used AI in ≥25% of tasks (Jan 2025), rising to ~49% by early 2026. Usage concentrated in software and technical writing; distinguishes automation vs. augmentation usage. The machine-readable base layer for this map."
+    },
+    "aei-labor": {
+      "title": "Labor market impacts research",
+      "publisher": "Anthropic",
+      "year": "2026",
+      "url": "https://www.anthropic.com/research/labor-market-impacts",
+      "group": "Empirical usage & labor-market data",
+      "summary": "Effective-coverage measure. No clear aggregate unemployment signal as of early 2026, but hiring of 22–25-year-old workers into the most-exposed roles slowed ~14% vs. counterfactual."
+    },
+    "stanford-canaries": {
+      "title": "Canaries in the Coal Mine (Brynjolfsson, Chandar & Chen)",
+      "publisher": "Stanford Digital Economy Lab",
+      "year": "2025–2026",
+      "url": "https://digitaleconomy.stanford.edu/publications/canaries-in-the-coal-mine/",
+      "group": "Empirical usage & labor-market data",
+      "summary": "ADP payroll microdata: early-career workers (22–25) in the most AI-exposed occupations show ~13% relative employment decline — up to ~20% for young software developers. Declines concentrated in automative (not augmentative) AI applications; adjustment via employment, not wages. The single best early-warning empirical source; the live Canaries Dashboard updates with AEI data."
+    },
+    "mit-iceberg": {
+      "title": "Iceberg Index",
+      "publisher": "MIT",
+      "year": "2025",
+      "url": "https://iceberg.mit.edu/",
+      "group": "Empirical usage & labor-market data",
+      "summary": "Simulation: AI can technically perform the work of ~11.7% of the US labor market (~$1.2T in wages); visible tech-layoff disruption is only ~2.2% — the rest sits quietly in HR, logistics, and office administration."
+    },
+    "goldman-2023": {
+      "title": "The Potentially Large Effects of AI on Economic Growth (Hatzius et al.)",
+      "publisher": "Goldman Sachs",
+      "year": "2023",
+      "url": "https://www.goldmansachs.com/insights/articles/generative-ai-could-raise-global-gdp-by-7-percent",
+      "group": "Exposure & projection studies",
+      "summary": "~300M full-time-equivalent jobs exposed globally; ~25% of US work hours automatable. Office/admin support highest (46%), legal 44%, architecture/engineering 37%; physical and outdoor occupations least exposed. Exposure ≠ elimination: most affected workers see less than half their workload automated."
+    },
+    "goldman-2026": {
+      "title": "AI and the US labor market — 2026 update",
+      "publisher": "Goldman Sachs",
+      "year": "2026",
+      "url": "https://www.goldmansachs.com/insights",
+      "group": "Exposure & projection studies",
+      "summary": "~9% of the US workforce (~15M workers) displaced across a 10-year transition; explicitly calls a \"job apocalypse\" unlikely. Notes job creation in the power and datacenter buildout."
+    },
+    "imf-2024": {
+      "title": "Gen-AI: Artificial Intelligence and the Future of Work",
+      "publisher": "IMF",
+      "year": "2024",
+      "url": "https://www.imf.org/en/Publications/Staff-Discussion-Notes/Issues/2024/01/14/Gen-AI-Artificial-Intelligence-and-the-Future-of-Work-542379",
+      "group": "Exposure & projection studies",
+      "summary": "~40% of global employment exposed; ~60% in advanced economies, of which roughly half may be harmed and half augmented. Inequality likely worsens. Its complementarity index by occupation is machine-readable and reusable."
+    },
+    "wef-2025": {
+      "title": "Future of Jobs Report 2025",
+      "publisher": "World Economic Forum",
+      "year": "2025",
+      "url": "https://www.weforum.org/publications/the-future-of-jobs-report-2025/",
+      "group": "Exposure & projection studies",
+      "summary": "92M jobs displaced / 170M created by 2030 (net +78M, all drivers, not just AI). Fastest-declining: data entry clerks, bank tellers, cashiers, administrative assistants. ~40% of employers plan AI-related workforce reduction; 60% of workers need reskilling by 2027."
+    },
+    "amodei-axios": {
+      "title": "Dario Amodei interview on entry-level white-collar jobs",
+      "publisher": "Axios",
+      "year": "2025",
+      "url": "https://www.axios.com/2025/05/28/ai-jobs-white-collar-unemployment-anthropic",
+      "group": "Frontier viewpoints",
+      "summary": "AI could eliminate ~50% of entry-level white-collar jobs within 1–5 years, with unemployment of 10–20%; names finance, law, consulting, and tech. \"A duty to be honest about what is coming.\""
+    },
+    "amodei-adolescence": {
+      "title": "The Adolescence of Technology",
+      "publisher": "Dario Amodei",
+      "year": "2026",
+      "url": "https://www.darioamodei.com/",
+      "group": "Frontier viewpoints",
+      "summary": "20k-word essay doubling down: AI systems of beyond-Nobel capability possible by 2027; policy proposals including a token tax. Counterpoint noted in coverage: his 90%-of-code prediction was true inside Anthropic, 25–40% across the industry — the lab-view vs. diffusion-speed gap."
+    },
+    "amodei-loving-grace": {
+      "title": "Machines of Loving Grace",
+      "publisher": "Dario Amodei",
+      "year": "2024",
+      "url": "https://www.darioamodei.com/essay/machines-of-loving-grace",
+      "group": "Frontier viewpoints",
+      "summary": "The optimistic branch: compressed decades of biology and health progress. Used here as the upside-scenario source."
+    },
+    "aschenbrenner": {
+      "title": "Situational Awareness",
+      "publisher": "Leopold Aschenbrenner",
+      "year": "2024",
+      "url": "https://situational-awareness.ai",
+      "group": "Frontier viewpoints",
+      "summary": "The influential fast-takeoff scenario document — AGI ~2027 via compute + algorithmic scaling, intelligence explosion, national-security framing. Used as the fast-timeline bound; not empirical."
+    },
+    "kanungo-2026": {
+      "title": "Secondary synthesis: tracking Amodei's predictions vs. 2025–26 data (Kanungo)",
+      "publisher": "Secondary synthesis",
+      "year": "2026",
+      "url": null,
+      "group": "Secondary syntheses & project framework",
+      "summary": "Entry-level tech hiring down 30–50%; ~55k US layoffs explicitly AI-attributed in 2025; bank cuts concentrated at analyst level; Anthropic hiring \"orchestrators of Claudes.\" Used for color — numbers verified against primaries before quoting."
+    },
+    "island-2025": {
+      "title": "Secondary synthesis: AI labor-market roundup",
+      "publisher": "Secondary synthesis",
+      "year": "2025",
+      "url": null,
+      "group": "Secondary syntheses & project framework",
+      "summary": "Secondary tracking of AI-attributed layoffs and hiring shifts through 2025. Used for color — numbers verified against primaries before quoting."
+    },
+    "sq-2026": {
+      "title": "Secondary synthesis: occupation-level automation tracking",
+      "publisher": "Secondary synthesis",
+      "year": "2026",
+      "url": null,
+      "group": "Secondary syntheses & project framework",
+      "summary": "Secondary synthesis of occupation-level automation data (paralegal document work, data entry) through 2026. Used for color — numbers verified against primaries before quoting."
+    },
+    "framework": {
+      "title": "This project's mechanism framework",
+      "publisher": "AI Economic Impact Map",
+      "year": "2026",
+      "url": "#methodology",
+      "group": "Secondary syntheses & project framework",
+      "summary": "Scores marked \"framework\" rest primarily on the verification-speed / accountability-shield / demand-side logic described in the methodology, rather than a specific external study. Lowest evidential tier — flagged honestly via the per-job confidence field."
+    }
+  }
+}

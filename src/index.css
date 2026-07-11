@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f7f6f3;
+  --ink: #1c1b19;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Hatched overlay for high second-order (demand-side) risk.
+   Dark stripes for light cells, light stripes for dark cells. */
+.stripes-dark {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.28) 0 4px,
+    transparent 4px 10px
+  );
+}
+.stripes-light {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.38) 0 4px,
+    transparent 4px 10px
+  );
+}
+
+.cell-transition {
+  transition:
+    left 320ms ease,
+    width 320ms ease,
+    opacity 320ms ease;
+}

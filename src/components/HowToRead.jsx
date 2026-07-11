@@ -46,8 +46,9 @@ export default function HowToRead({ categories, rangeNote }) {
                 aria-hidden
               />
               <span>
-                <strong>Striped</strong> — safe from automation, exposed to customers losing
-                income (high demand-side risk). Also marked ⚠.
+                <strong>Striped</strong> — safe from automation, high <em>indirect</em> exposure:
+                customers&rsquo; income, worker influx, office vacancy (see &ldquo;The second
+                wave&rdquo;). Also marked ⚠.
               </span>
             </li>
             <li className="flex items-start gap-2.5">

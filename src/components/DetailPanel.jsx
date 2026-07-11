@@ -58,7 +58,7 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
 
       <dl className="mt-4 space-y-1.5 text-sm">
         <div className="flex justify-between gap-4">
-          <dt className="text-neutral-500">Second-order (demand-side) risk</dt>
+          <dt className="text-neutral-500">Second-order (indirect) risk</dt>
           <dd className="font-semibold">
             {RISK_LABELS[job.second_order_risk] || job.second_order_risk}
             {job.second_order_risk === 'high' && ' ⚠'}
@@ -78,6 +78,30 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
       <p className="mt-4 border-l-2 border-neutral-300 pl-3 text-sm leading-relaxed text-neutral-700">
         {job.note}
       </p>
+
+      {job.second_order_channels?.length > 0 && (
+        <div className="mt-4 rounded-lg bg-amber-50 p-3">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-amber-800">
+            How this job gets hit indirectly
+          </h4>
+          <ul className="mt-2 space-y-2">
+            {job.second_order_channels.map((c) => {
+              const ch = meta.second_order_channels?.[c]
+              if (!ch) return null
+              return (
+                <li key={c} className="text-sm">
+                  <span className="font-semibold">
+                    {ch.glyph} {ch.label}
+                  </span>
+                  <span className="block text-xs leading-snug text-neutral-600">
+                    {ch.description}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      )}
 
       {job.mechanisms?.length > 0 && (
         <div className="mt-4">

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AI Economic Impact Map",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "updated": "2026-07-11",
     "description": "Hierarchical dataset of industries and occupations with AI impact assessments. Scores are editorial estimates synthesized from cited research (see sources) plus a mechanism-based framework (verification speed, artifact-vs-outcome work, demand-side second-order effects). Intended for a zoomable tree/icicle visualization.",
     "scoring": {
@@ -33,10 +33,24 @@
           "range": "0-9 or negative-risk"
         }
       },
-      "second_order_risk": "low | medium | high. Risk NOT from automation but from customers losing income (demand collapse), per the trickle-down mechanism.",
+      "second_order_risk": "low | medium | high. Combined risk NOT from automation of the job itself but from second-order channels (see meta.second_order_channels): customers losing income, displaced workers flooding in, tax-base erosion, office-ecosystem decay, ladder collapse.",
       "timeline": "now | 1-3y | 3-7y | 7-15y. When the main effect is expected to be clearly visible in employment/wages.",
       "confidence": "low | medium | high. How well-supported by current data vs. extrapolation.",
-      "range_note": "Category score ranges are guidance, not law: the category field is editorial judgment and may override the band (e.g. a job scored 15 can still be 'growing' when the direction of demand is clearly up)."
+      "range_note": "Category score ranges are guidance, not law: the category field is editorial judgment and may override the band (e.g. a job scored 15 can still be 'growing' when the direction of demand is clearly up).",
+      "second_order_levels": {
+        "low": {
+          "color": "#27ae60",
+          "label": "Low indirect exposure"
+        },
+        "medium": {
+          "color": "#f1c40f",
+          "label": "Medium indirect exposure"
+        },
+        "high": {
+          "color": "#c0392b",
+          "label": "High indirect exposure"
+        }
+      }
     },
     "mechanisms": {
       "artifact_production": "Work defined by producing artifacts from specs (code, copy, reports, designs) - fastest to automate.",
@@ -49,6 +63,33 @@
       "jevons": "Cheaper output expands total demand, partially offsetting displacement.",
       "trust_scarcity": "AI flood makes verification/authenticity scarce and valuable - growth driver.",
       "bottleneck_owner": "Sits on a physical/legal bottleneck (energy, land, permits, compute) - value accrues here."
+    },
+    "second_order_channels": {
+      "demand_collapse": {
+        "label": "Customer income",
+        "glyph": "💸",
+        "description": "Paid from discretionary household spending - the job inherits its customers' displacement risk."
+      },
+      "labor_supply_influx": {
+        "label": "Worker influx",
+        "glyph": "🔀",
+        "description": "Automation-proof, so displaced workers retrain into it - wages compress even while the jobs survive."
+      },
+      "fiscal_squeeze": {
+        "label": "Tax-base squeeze",
+        "glyph": "🏛️",
+        "description": "State- or insurance-funded - exposed to a shrinking wage-tax base, not to automation."
+      },
+      "office_ecosystem": {
+        "label": "Office ecosystem",
+        "glyph": "🏢",
+        "description": "Demand is occupied buildings and commuters - white-collar automation empties exactly that."
+      },
+      "pipeline_collapse": {
+        "label": "Ladder collapse",
+        "glyph": "🪜",
+        "description": "Entry rungs vanish - the profession keeps its seniors but loses the path to becoming one."
+      }
     }
   },
   "sources_note": "Source IDs reference sources.json / the sources section of the spec document.",
@@ -77,6 +118,9 @@
             "aei",
             "amodei-axios",
             "signalfire-2025"
+          ],
+          "second_order_channels": [
+            "pipeline_collapse"
           ]
         },
         {
@@ -275,6 +319,9 @@
           "sources": [
             "amodei-axios",
             "kanungo-2026"
+          ],
+          "second_order_channels": [
+            "pipeline_collapse"
           ]
         },
         {
@@ -325,6 +372,9 @@
           "note": "State-backed accountability roles; change requires legal reform, not just capability.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         }
       ]
@@ -351,6 +401,9 @@
             "kanungo-2026",
             "amodei-axios",
             "citi-2024"
+          ],
+          "second_order_channels": [
+            "pipeline_collapse"
           ]
         },
         {
@@ -418,6 +471,9 @@
           "note": "Trust relationship persists for large clients; mass-affluent advice automates. Barbell.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -619,6 +675,9 @@
           "note": "Aggregation/rewrite journalism dies; original reporting, sources, and trusted bylines gain value in the synthetic flood.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -627,7 +686,7 @@
           "score": 58,
           "category": "transformed",
           "timeline": "1-3y",
-          "second_order_risk": "low",
+          "second_order_risk": "medium",
           "confidence": "medium",
           "mechanisms": [
             "artifact_production"
@@ -635,6 +694,9 @@
           "note": "Cutting/assembly automates fast; taste and narrative judgment persist.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx"
           ]
         },
         {
@@ -652,6 +714,9 @@
           "note": "Presence is un-fakeable - live boomed as recorded got free. But income depends on audiences' discretionary spend: high second-order exposure.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -669,6 +734,10 @@
           "note": "Power-law brutal, but proven-human personality is the scarce asset as feeds go synthetic.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx",
+            "demand_collapse"
           ]
         },
         {
@@ -780,6 +849,9 @@
           "note": "AI companions take the mass market's low end; being witnessed by a human who has stakes remains the premium product. Contested territory.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -797,6 +869,10 @@
           "note": "Demographics guarantee demand; funding (state budgets, family income) is the constraint, not automation.",
           "sources": [
             "imf-2024"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze",
+            "demand_collapse"
           ]
         },
         {
@@ -840,6 +916,9 @@
           "note": "Childcare + socialization + motivation is the real product; AI becomes the assistant, not the replacement. State-funded demand.",
           "sources": [
             "imf-2024"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         },
         {
@@ -858,6 +937,10 @@
           "sources": [
             "framework",
             "stanford-canaries"
+          ],
+          "second_order_channels": [
+            "pipeline_collapse",
+            "demand_collapse"
           ]
         },
         {
@@ -866,7 +949,7 @@
           "score": 70,
           "category": "displaced",
           "timeline": "now",
-          "second_order_risk": "low",
+          "second_order_risk": "medium",
           "confidence": "high",
           "mechanisms": [
             "artifact_production"
@@ -874,6 +957,9 @@
           "note": "AI tutoring is free, patient, and personalized; premium survives only bundled with accountability/motivation.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx"
           ]
         },
         {
@@ -917,6 +1003,10 @@
           "sources": [
             "goldman-2023",
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx",
+            "demand_collapse"
           ]
         },
         {
@@ -933,6 +1023,10 @@
           "note": "Canonical insulated trade; wage pressure comes from labor supply influx, not robots.",
           "sources": [
             "goldman-2023"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx",
+            "demand_collapse"
           ]
         },
         {
@@ -950,6 +1044,10 @@
           "note": "Prefab and construction robotics arrive late-window; demand tied to building cycles and credit.",
           "sources": [
             "goldman-2023"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -966,6 +1064,9 @@
           "note": "EV transition shrinks maintenance volume more than AI does; diagnostics get AI-assisted.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1025,6 +1126,10 @@
           "note": "Unstructured urban last-mile resists robots longest; gig economics compress wages regardless.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx",
+            "demand_collapse"
           ]
         },
         {
@@ -1074,6 +1179,9 @@
           "note": "The canonical accountability shield: autopilot outflies humans, two pilots stay - certification and public trust move slower than capability.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1091,6 +1199,9 @@
           "note": "Robotaxis are live and expanding city by city; the constraint is rollout capital and regulation, not capability. Gig flexibility made the job easy to enter - and easy to exit invisibly.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "labor_supply_influx"
           ]
         }
       ]
@@ -1193,6 +1304,9 @@
           "note": "Next robotics generation (vision-language-action models) extends automation to smaller-batch work.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1268,6 +1382,9 @@
           "note": "Kitchen robotics stay niche; restaurant demand tracks household income - the automation-proof job with automation-exposed customers.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1285,6 +1402,10 @@
           "note": "Human service is part of the premium product; volume segment thins with discretionary spend.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -1301,6 +1422,9 @@
           "note": "WEF fastest-declining list; self-checkout + e-commerce, accelerated by cost pressure.",
           "sources": [
             "wef-2025"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1318,6 +1442,9 @@
           "note": "Hospitality is presence work; demand tracks travel budgets. Experience economy grows at the premium end.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1335,6 +1462,10 @@
           "note": "The canonical second-order case: the job survives automation and loses its customers' salaries.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -1353,6 +1484,10 @@
           "sources": [
             "wef-2025",
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -1370,6 +1505,9 @@
           "note": "E-commerce and self-service keep shrinking floor headcount - a pre-AI trend AI accelerates; experiential and high-touch retail persist at the premium end.",
           "sources": [
             "wef-2025"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         }
       ]
@@ -1395,6 +1533,9 @@
           "note": "High task overlap, low displacement speed: unions, law, and politics stretch the timeline; attrition-based shrinkage.",
           "sources": [
             "mit-iceberg"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         },
         {
@@ -1413,6 +1554,9 @@
           "note": "Physical presence + state authority + accountability; AI augments (analysis, dispatch) rather than replaces.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         },
         {
@@ -1447,6 +1591,9 @@
           "note": "Drone/autonomy shift restructures force composition; headcount politics are national, not economic.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         },
         {
@@ -1465,6 +1612,9 @@
           "sources": [
             "imf-2024",
             "framework"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze"
           ]
         }
       ]
@@ -1532,6 +1682,10 @@
           "note": "Touch + trust + presence; demand tracks disposable income.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -1549,6 +1703,10 @@
           "note": "AI coaches take the info layer; accountability-to-a-human is the surviving product.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "labor_supply_influx"
           ]
         },
         {
@@ -1567,6 +1725,10 @@
           "note": "Nobody delegates children to robots; chronically undersupplied, state-subsidized in Europe.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "fiscal_squeeze",
+            "demand_collapse"
           ]
         },
         {
@@ -1584,6 +1746,10 @@
           "note": "Touch is the product; partially health-system funded (insulating the demand side).",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse",
+            "fiscal_squeeze"
           ]
         },
         {
@@ -1601,6 +1767,9 @@
           "note": "The 'last human premium': handmade as luxury category, growing as machine-made floods. Small in volume, culturally large.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         }
       ]
@@ -1808,6 +1977,9 @@
           "note": "Large-deal trust and multi-stakeholder navigation stay human; fewer, more senior seats as AI handles research, proposals and follow-up. Quota economics compress.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1851,6 +2023,9 @@
           "note": "Search, valuation and transaction paperwork automate; trust and negotiation persist for the largest purchase of most lives. Commissions compress; volume tracks the economy.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "demand_collapse"
           ]
         },
         {
@@ -1868,6 +2043,9 @@
           "note": "The admin layer automates; the deeper exposure is demand - commercial property income depends on office headcount that AI is thinning. Residential is more stable.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "office_ecosystem"
           ]
         },
         {
@@ -1886,6 +2064,9 @@
           "sources": [
             "goldman-2023",
             "framework"
+          ],
+          "second_order_channels": [
+            "office_ecosystem"
           ]
         },
         {
@@ -1903,6 +2084,9 @@
           "note": "AI surveillance multiplies coverage per guard; physical presence and liability keep a floor. Site count tracks the same office economy.",
           "sources": [
             "framework"
+          ],
+          "second_order_channels": [
+            "office_ecosystem"
           ]
         }
       ]

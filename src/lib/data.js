@@ -57,6 +57,14 @@ export function mechanismLabel(key) {
   return key.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase())
 }
 
+// Aggregate an industry's second-order exposure from its jobs (low/medium/high).
+const SO_WEIGHT = { low: 0, medium: 1, high: 2 }
+export function industrySoLevel(ind) {
+  const avg =
+    ind.jobs.reduce((n, j) => n + (SO_WEIGHT[j.second_order_risk] ?? 0), 0) / ind.jobs.length
+  return avg < 0.5 ? 'low' : avg < 1.15 ? 'medium' : 'high'
+}
+
 export function findJob(industries, jobId) {
   for (const ind of industries) {
     const job = ind.jobs.find((j) => j.id === jobId)

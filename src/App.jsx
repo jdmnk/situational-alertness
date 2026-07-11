@@ -7,6 +7,7 @@ import Controls from './components/Controls'
 import EconomyStrip from './components/EconomyStrip'
 import Board from './components/Board'
 import DetailPanel from './components/DetailPanel'
+import SecondWave from './components/SecondWave'
 import HowToRead from './components/HowToRead'
 import Methodology from './components/Methodology'
 import Sources from './components/Sources'
@@ -85,12 +86,25 @@ export default function App() {
     (t) => !view.times || view.times.includes(t),
     [view.times],
   )
+  const chanActive = useCallback(
+    (c) => !view.chans || view.chans.includes(c),
+    [view.chans],
+  )
   const isMatch = useCallback(
-    (job) =>
-      catActive(job.category) &&
-      timeActive(job.timeline) &&
-      (!view.q || job.name.toLowerCase().includes(view.q.toLowerCase())),
-    [catActive, timeActive, view.q],
+    (job) => {
+      // Fate categories filter only in the fate lens; channels only in the SO lens.
+      if (view.lens === 'so') {
+        if (view.chans && !(job.second_order_channels || []).some((c) => view.chans.includes(c)))
+          return false
+      } else if (!catActive(job.category)) {
+        return false
+      }
+      return (
+        timeActive(job.timeline) &&
+        (!view.q || job.name.toLowerCase().includes(view.q.toLowerCase()))
+      )
+    },
+    [catActive, timeActive, view.q, view.lens, view.chans],
   )
 
   const toggleCat = useCallback(
@@ -123,6 +137,30 @@ export default function App() {
       update({ industry: id })
     },
     [update],
+  )
+
+  const allChanKeys = useMemo(
+    () => Object.keys(data?.meta.second_order_channels || {}),
+    [data],
+  )
+  const toggleChan = useCallback(
+    (c) => {
+      setView((v) => {
+        const active = new Set(v.chans ?? allChanKeys)
+        active.has(c) ? active.delete(c) : active.add(c)
+        const arr = allChanKeys.filter((k) => active.has(k))
+        return { ...v, chans: arr.length === allChanKeys.length ? null : arr }
+      })
+    },
+    [allChanKeys],
+  )
+
+  const setLens = useCallback(
+    (patch) => {
+      if (patch.lens && patch.lens !== view.lens) track('lens_changed', { lens: patch.lens })
+      update(patch)
+    },
+    [update, view.lens],
   )
 
   // Close the detail panel with Escape.
@@ -162,18 +200,22 @@ export default function App() {
         <section id="map" className="scroll-mt-4">
           <div className="sticky top-0 z-30 -mx-4 mb-4 border-b border-neutral-200/70 bg-[#f7f6f3]/90 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
             <Controls
+              meta={data.meta}
               categories={categories}
               view={view}
               catActive={catActive}
               timeActive={timeActive}
+              chanActive={chanActive}
               onToggleCat={toggleCat}
-              onUpdate={update}
+              onToggleChan={toggleChan}
+              onUpdate={setLens}
             />
           </div>
           {!isMobile && (
             <EconomyStrip
               industries={sortedIndustries}
               meta={data.meta}
+              lens={view.lens}
               focusId={view.industry}
               onJump={focusIndustry}
             />
@@ -181,6 +223,7 @@ export default function App() {
           <Board
             industries={sortedIndustries}
             meta={data.meta}
+            lens={view.lens}
             isMatch={isMatch}
             selectedJobId={view.job}
             focusId={view.industry}
@@ -190,6 +233,14 @@ export default function App() {
           />
         </section>
 
+        <SecondWave
+          meta={data.meta}
+          industries={data.industries}
+          onOpenLens={() => {
+            setLens({ lens: 'so' })
+            document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        />
         <HowToRead categories={categories} rangeNote={data.meta.scoring.range_note} />
         <Methodology />
         <Sources sources={sources} />

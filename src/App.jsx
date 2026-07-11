@@ -190,7 +190,7 @@ export default function App() {
           />
         </section>
 
-        <HowToRead categories={categories} />
+        <HowToRead categories={categories} rangeNote={data.meta.scoring.range_note} />
         <Methodology />
         <Sources sources={sources} />
       </main>

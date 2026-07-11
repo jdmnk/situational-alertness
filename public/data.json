@@ -1,21 +1,42 @@
 {
   "meta": {
     "title": "AI Economic Impact Map",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "updated": "2026-07-11",
     "description": "Hierarchical dataset of industries and occupations with AI impact assessments. Scores are editorial estimates synthesized from cited research (see sources) plus a mechanism-based framework (verification speed, artifact-vs-outcome work, demand-side second-order effects). Intended for a zoomable tree/icicle visualization.",
     "scoring": {
       "exposure_score": "0-100. Higher = more of the occupation's current economic value is at risk of AI substitution within the timeline window. Composite of task automatability, institutional friction (regulation/liability), and demand-side risk.",
       "categories": {
-        "displaced": { "color": "#c0392b", "label": "High displacement risk", "range": "70-100" },
-        "transformed": { "color": "#e67e22", "label": "Transformed / compressed", "range": "45-69" },
-        "pressured": { "color": "#f1c40f", "label": "Second-order pressure (demand-side)", "range": "30-44" },
-        "insulated": { "color": "#27ae60", "label": "Insulated (for now)", "range": "10-29" },
-        "growing": { "color": "#145a32", "label": "Growing / created by AI", "range": "0-9 or negative-risk" }
+        "displaced": {
+          "color": "#c0392b",
+          "label": "High displacement risk",
+          "range": "70-100"
+        },
+        "transformed": {
+          "color": "#e67e22",
+          "label": "Transformed / compressed",
+          "range": "45-69"
+        },
+        "pressured": {
+          "color": "#f1c40f",
+          "label": "Second-order pressure (demand-side)",
+          "range": "30-44"
+        },
+        "insulated": {
+          "color": "#27ae60",
+          "label": "Insulated (for now)",
+          "range": "10-29"
+        },
+        "growing": {
+          "color": "#145a32",
+          "label": "Growing / created by AI",
+          "range": "0-9 or negative-risk"
+        }
       },
       "second_order_risk": "low | medium | high. Risk NOT from automation but from customers losing income (demand collapse), per the trickle-down mechanism.",
       "timeline": "now | 1-3y | 3-7y | 7-15y. When the main effect is expected to be clearly visible in employment/wages.",
-      "confidence": "low | medium | high. How well-supported by current data vs. extrapolation."
+      "confidence": "low | medium | high. How well-supported by current data vs. extrapolation.",
+      "range_note": "Category score ranges are guidance, not law: the category field is editorial judgment and may override the band (e.g. a job scored 15 can still be 'growing' when the direction of demand is clearly up)."
     },
     "mechanisms": {
       "artifact_production": "Work defined by producing artifacts from specs (code, copy, reports, designs) - fastest to automate.",
@@ -38,16 +59,182 @@
       "summary": "Ground zero: fastest verification loop of any knowledge work, so it automates itself first. Headcount at the median falls sharply while output explodes (Jevons). Value migrates from writing code to owning outcomes, verifying systems, and securing them.",
       "overall_score": 62,
       "jobs": [
-        { "id": "junior-dev", "name": "Junior software developer", "score": 88, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Entry hiring already down; 22-25yo devs -13 to -20% in exposed occupations (Stanford ADP data). The apprenticeship ladder is being pulled up.", "sources": ["stanford-canaries", "aei", "amodei-axios"] },
-        { "id": "midlevel-dev", "name": "Mid-level developer (ticket-to-PR work)", "score": 72, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Teams shrink via attrition and non-backfill; spec-to-code work competes directly with agents.", "sources": ["aei", "goldman-2023"] },
-        { "id": "senior-eng", "name": "Senior engineer / architect (outcome owner)", "score": 30, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["slow_verification", "accountability_shield"], "note": "Role inverts to directing agent fleets, verifying systems, owning accountability. Fewer seats, higher pay per seat.", "sources": ["aei", "amodei-axios"] },
-        { "id": "qa", "name": "QA / test engineer (manual & scripted)", "score": 85, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Test generation and regression are among the best-automated tasks; role folds into dev or transforms into quality-oversight.", "sources": ["aei"] },
-        { "id": "devops-sre", "name": "DevOps / SRE / reliability", "score": 38, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["accountability_shield", "slow_verification"], "note": "More AI-written code = more production risk = someone senior must own failures. Compresses slower than dev.", "sources": ["aei"] },
-        { "id": "security-eng", "name": "Security engineer / AI security", "score": 8, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["trust_scarcity"], "note": "Offense gets AI too; agent attack surfaces (prompt injection, exfiltration) create a new discipline with almost no practitioners.", "sources": ["framework"] },
-        { "id": "ai-evals", "name": "AI evaluation / reliability engineer", "score": 5, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["trust_scarcity", "accountability_shield"], "note": "New category: evals, guardrails, oversight tooling, AI forensics on machine-written codebases.", "sources": ["framework", "aei"] },
-        { "id": "product-manager", "name": "Product manager", "score": 48, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["artifact_production"], "note": "Coordination/status layer evaporates; intent-definition and stakeholder accountability persist. Fewer, more senior PMs.", "sources": ["framework"] },
-        { "id": "it-support", "name": "IT support / helpdesk", "score": 80, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Tier-1/2 support is a solved LLM problem; residual work is physical hardware and high-trust access.", "sources": ["goldman-2023", "wef-2025"] },
-        { "id": "data-engineer", "name": "Data engineer / analyst (junior)", "score": 70, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Pipeline plumbing and standard analysis automate; judgment about what to measure persists at senior level.", "sources": ["aei", "goldman-2023"] }
+        {
+          "id": "junior-dev",
+          "name": "Junior software developer",
+          "score": 88,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Entry hiring already down; 22-25yo employment in exposed occupations -16% (Stanford ADP, Nov 2025 revision; up to ~-20% for young software developers). The apprenticeship ladder is being pulled up.",
+          "sources": [
+            "stanford-canaries",
+            "aei",
+            "amodei-axios",
+            "signalfire-2025"
+          ]
+        },
+        {
+          "id": "midlevel-dev",
+          "name": "Mid-level developer (ticket-to-PR work)",
+          "score": 72,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Teams shrink via attrition and non-backfill; spec-to-code work competes directly with agents.",
+          "sources": [
+            "aei",
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "senior-eng",
+          "name": "Senior engineer / architect (outcome owner)",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "slow_verification",
+            "accountability_shield"
+          ],
+          "note": "Role inverts to directing agent fleets, verifying systems, owning accountability. Fewer seats, higher pay per seat.",
+          "sources": [
+            "aei",
+            "amodei-axios"
+          ]
+        },
+        {
+          "id": "qa",
+          "name": "QA / test engineer (manual & scripted)",
+          "score": 85,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Test generation and regression are among the best-automated tasks; role folds into dev or transforms into quality-oversight.",
+          "sources": [
+            "aei"
+          ]
+        },
+        {
+          "id": "devops-sre",
+          "name": "DevOps / SRE / reliability",
+          "score": 38,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "accountability_shield",
+            "slow_verification"
+          ],
+          "note": "More AI-written code = more production risk = someone senior must own failures. Compresses slower than dev.",
+          "sources": [
+            "aei"
+          ]
+        },
+        {
+          "id": "security-eng",
+          "name": "Security engineer / AI security",
+          "score": 8,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "trust_scarcity"
+          ],
+          "note": "Offense gets AI too; agent attack surfaces (prompt injection, exfiltration) create a new discipline with almost no practitioners.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "ai-evals",
+          "name": "AI evaluation / reliability engineer",
+          "score": 5,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "trust_scarcity",
+            "accountability_shield"
+          ],
+          "note": "New category: evals, guardrails, oversight tooling, AI forensics on machine-written codebases.",
+          "sources": [
+            "framework",
+            "aei"
+          ]
+        },
+        {
+          "id": "product-manager",
+          "name": "Product manager",
+          "score": 48,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Coordination/status layer evaporates; intent-definition and stakeholder accountability persist. Fewer, more senior PMs.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "it-support",
+          "name": "IT support / helpdesk",
+          "score": 80,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Tier-1/2 support is a solved LLM problem; residual work is physical hardware and high-trust access.",
+          "sources": [
+            "goldman-2023",
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "data-engineer",
+          "name": "Data engineer / analyst (junior)",
+          "score": 70,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Pipeline plumbing and standard analysis automate; judgment about what to measure persists at senior level.",
+          "sources": [
+            "aei",
+            "goldman-2023"
+          ]
+        }
       ]
     },
     {
@@ -56,11 +243,90 @@
       "summary": "44% of legal tasks automatable (Goldman), but liability structure keeps accountable humans mandatory. The pyramid inverts: document work dies, courtroom/accountability work persists, leverage model (bill juniors) breaks.",
       "overall_score": 52,
       "jobs": [
-        { "id": "paralegal", "name": "Paralegal / legal assistant (document work)", "score": 75, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Document review, discovery, research: core LLM strengths. BLS still projects ~flat headcount because legal demand grows (Jevons) - a race between automation and demand.", "sources": ["goldman-2023", "sq-2026"] },
-        { "id": "junior-associate", "name": "First-year associate (research/drafting)", "score": 72, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "The billable-hour apprenticeship model breaks; firms hire fewer, later.", "sources": ["amodei-axios", "kanungo-2026"] },
-        { "id": "litigator", "name": "Litigator / courtroom counsel", "score": 22, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["accountability_shield", "human_premium"], "note": "Courts require human representation; persuasion of human judges/juries is human-premium work.", "sources": ["aei-labor"] },
-        { "id": "compliance-counsel", "name": "Compliance / regulatory counsel", "score": 25, "category": "insulated", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["accountability_shield", "trust_scarcity"], "note": "AI regulation itself generates demand; someone must sign the filings.", "sources": ["framework"] },
-        { "id": "notary-judge", "name": "Judges, notaries, court officials", "score": 12, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["accountability_shield"], "note": "State-backed accountability roles; change requires legal reform, not just capability.", "sources": ["framework"] }
+        {
+          "id": "paralegal",
+          "name": "Paralegal / legal assistant (document work)",
+          "score": 75,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Document review, discovery, research: core LLM strengths. BLS still projects ~flat headcount because legal demand grows (Jevons) - a race between automation and demand.",
+          "sources": [
+            "goldman-2023",
+            "sq-2026"
+          ]
+        },
+        {
+          "id": "junior-associate",
+          "name": "First-year associate (research/drafting)",
+          "score": 72,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "The billable-hour apprenticeship model breaks; firms hire fewer, later.",
+          "sources": [
+            "amodei-axios",
+            "kanungo-2026"
+          ]
+        },
+        {
+          "id": "litigator",
+          "name": "Litigator / courtroom counsel",
+          "score": 22,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "accountability_shield",
+            "human_premium"
+          ],
+          "note": "Courts require human representation; persuasion of human judges/juries is human-premium work.",
+          "sources": [
+            "aei-labor"
+          ]
+        },
+        {
+          "id": "compliance-counsel",
+          "name": "Compliance / regulatory counsel",
+          "score": 25,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "accountability_shield",
+            "trust_scarcity"
+          ],
+          "note": "AI regulation itself generates demand; someone must sign the filings.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "notary-judge",
+          "name": "Judges, notaries, court officials",
+          "score": 12,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "accountability_shield"
+          ],
+          "note": "State-backed accountability roles; change requires legal reform, not just capability.",
+          "sources": [
+            "framework"
+          ]
+        }
       ]
     },
     {
@@ -69,13 +335,141 @@
       "summary": "Citi: 54% of banking jobs highly automatable - highest of any industry. Entry analyst layer collapses; relationship, accountability, and capital-allocation layers persist. Sector revenue itself is demand-cyclical (second-order exposed).",
       "overall_score": 58,
       "jobs": [
-        { "id": "junior-analyst", "name": "Junior financial analyst (models, decks)", "score": 82, "category": "displaced", "timeline": "now", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Earnings models, pitch decks, research summaries: bounded pattern-rich work. Wall Street cutting concentrated at analyst level.", "sources": ["kanungo-2026", "amodei-axios"] },
-        { "id": "accountant", "name": "Accountant / bookkeeper (routine)", "score": 78, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Reconciliation, standard filings automate; sign-off and advisory persist in fewer seats.", "sources": ["goldman-2023", "wef-2025"] },
-        { "id": "auditor", "name": "Auditor (sign-off level)", "score": 28, "category": "insulated", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["accountability_shield", "trust_scarcity"], "note": "Audit is legally mandated independence; AI floods increase demand for verification. Fieldwork automates, opinion-signing doesn't.", "sources": ["framework"] },
-        { "id": "bank-teller", "name": "Bank teller / branch clerk", "score": 85, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Among WEF's fastest-declining roles to 2030; continuation of a pre-AI trend, accelerated.", "sources": ["wef-2025"] },
-        { "id": "wealth-advisor", "name": "Wealth / relationship manager", "score": 35, "category": "pressured", "timeline": "3-7y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["human_premium", "trust_scarcity"], "note": "Trust relationship persists for large clients; mass-affluent advice automates. Barbell.", "sources": ["framework"] },
-        { "id": "insurance-claims", "name": "Insurance claims processor / underwriter (routine)", "score": 76, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Document-heavy assessment work; complex/contested claims keep humans.", "sources": ["goldman-2023"] },
-        { "id": "trader-pm", "name": "Trader / portfolio manager", "score": 45, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["fast_verification"], "note": "Already heavily automated pre-LLM; discretionary layer thins further, accountability seats remain.", "sources": ["framework"] }
+        {
+          "id": "junior-analyst",
+          "name": "Junior financial analyst (models, decks)",
+          "score": 82,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Earnings models, pitch decks, research summaries: bounded pattern-rich work. Banks shrink junior hiring classes (down up to two-thirds at the largest firms) rather than cutting seniors.",
+          "sources": [
+            "kanungo-2026",
+            "amodei-axios",
+            "citi-2024"
+          ]
+        },
+        {
+          "id": "accountant",
+          "name": "Accountant / bookkeeper (routine)",
+          "score": 78,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Reconciliation, standard filings automate; sign-off and advisory persist in fewer seats.",
+          "sources": [
+            "goldman-2023",
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "auditor",
+          "name": "Auditor (sign-off level)",
+          "score": 28,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "accountability_shield",
+            "trust_scarcity"
+          ],
+          "note": "Audit is legally mandated independence; AI floods increase demand for verification. Fieldwork automates, opinion-signing doesn't.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "bank-teller",
+          "name": "Bank teller / branch clerk",
+          "score": 85,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Among WEF's fastest-declining roles to 2030; continuation of a pre-AI trend, accelerated.",
+          "sources": [
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "wealth-advisor",
+          "name": "Wealth / relationship manager",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "trust_scarcity"
+          ],
+          "note": "Trust relationship persists for large clients; mass-affluent advice automates. Barbell.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "insurance-claims",
+          "name": "Insurance claims processor / underwriter (routine)",
+          "score": 76,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Document-heavy assessment work; complex/contested claims keep humans.",
+          "sources": [
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "trader-pm",
+          "name": "Trader / portfolio manager",
+          "score": 45,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "fast_verification"
+          ],
+          "note": "Already heavily automated pre-LLM; discretionary layer thins further, accountability seats remain.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "loan-officer",
+          "name": "Loan officer / underwriter (retail)",
+          "score": 72,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Document-driven credit decisions are automated scoring plus paperwork - both solved; relationship lending and exception cases keep senior seats.",
+          "sources": [
+            "citi-2024",
+            "goldman-2023"
+          ]
+        }
       ]
     },
     {
@@ -84,11 +478,91 @@
       "summary": "Highest task-automation share in the US economy (~46%, Goldman). The largest absolute job category facing decline: scheduling, data entry, correspondence, filing are core LLM competencies.",
       "overall_score": 74,
       "jobs": [
-        { "id": "data-entry", "name": "Data entry clerk", "score": 95, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "WEF fastest-declining list; near-total task overlap with current AI.", "sources": ["wef-2025", "sq-2026"] },
-        { "id": "exec-assistant", "name": "Executive / administrative assistant", "score": 68, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Scheduling/correspondence automates; trust, discretion, and physical presence keep a thinner senior layer.", "sources": ["wef-2025", "goldman-2023"] },
-        { "id": "customer-service", "name": "Customer service representative", "score": 84, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Stanford data shows early-career declines already visible in customer service; voice AI closes the last gap.", "sources": ["stanford-canaries", "wef-2025"] },
-        { "id": "hr-recruiter", "name": "HR coordinator / recruiter (screening)", "score": 65, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["artifact_production"], "note": "Screening/coordination automates while AI-flooded applications paradoxically raise the value of human judgment and referral networks.", "sources": ["mit-iceberg", "framework"] },
-        { "id": "translator", "name": "Translator / interpreter (text)", "score": 88, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Commodity translation solved; residual value in certified/legal/literary niches and live interpretation.", "sources": ["goldman-2023"] }
+        {
+          "id": "data-entry",
+          "name": "Data entry clerk",
+          "score": 95,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "WEF fastest-declining list; near-total task overlap with current AI.",
+          "sources": [
+            "wef-2025",
+            "sq-2026"
+          ]
+        },
+        {
+          "id": "exec-assistant",
+          "name": "Executive / administrative assistant",
+          "score": 68,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Scheduling/correspondence automates; trust, discretion, and physical presence keep a thinner senior layer.",
+          "sources": [
+            "wef-2025",
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "customer-service",
+          "name": "Customer service representative",
+          "score": 84,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Stanford data shows early-career declines already visible in customer service; voice AI closes the last gap.",
+          "sources": [
+            "stanford-canaries",
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "hr-recruiter",
+          "name": "HR coordinator / recruiter (screening)",
+          "score": 65,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Screening/coordination automates while AI-flooded applications paradoxically raise the value of human judgment and referral networks.",
+          "sources": [
+            "mit-iceberg",
+            "framework"
+          ]
+        },
+        {
+          "id": "translator",
+          "name": "Translator / interpreter (text)",
+          "score": 88,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Commodity translation solved; residual value in certified/legal/literary niches and live interpretation.",
+          "sources": [
+            "goldman-2023"
+          ]
+        }
       ]
     },
     {
@@ -97,13 +571,123 @@
       "summary": "Generation cost of content goes to zero; the middle dies while verified-human and taste/curation premiums emerge. Distribution and attention become the only moats.",
       "overall_score": 60,
       "jobs": [
-        { "id": "copywriter", "name": "Copywriter / content writer (generic)", "score": 90, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "SEO/marketing copy is the canonical automated artifact.", "sources": ["goldman-2023", "aei"] },
-        { "id": "graphic-designer", "name": "Graphic designer (production work)", "score": 74, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Production design automates; art direction and brand judgment persist in fewer seats.", "sources": ["goldman-2023"] },
-        { "id": "journalist", "name": "Journalist (commodity news)", "score": 62, "category": "transformed", "timeline": "1-3y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["artifact_production", "trust_scarcity"], "note": "Aggregation/rewrite journalism dies; original reporting, sources, and trusted bylines gain value in the synthetic flood.", "sources": ["framework"] },
-        { "id": "video-editor", "name": "Video editor / motion designer", "score": 58, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["artifact_production"], "note": "Cutting/assembly automates fast; taste and narrative judgment persist.", "sources": ["framework"] },
-        { "id": "performer", "name": "Live performer / musician (live)", "score": 15, "category": "insulated", "timeline": "7-15y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["human_premium", "demand_collapse"], "note": "Presence is un-fakeable - live boomed as recorded got free. But income depends on audiences' discretionary spend: high second-order exposure.", "sources": ["framework"] },
-        { "id": "influencer-creator", "name": "Creator / influencer (verified human)", "score": 25, "category": "insulated", "timeline": "3-7y", "second_order_risk": "medium", "confidence": "low", "mechanisms": ["human_premium", "trust_scarcity"], "note": "Power-law brutal, but proven-human personality is the scarce asset as feeds go synthetic.", "sources": ["framework"] },
-        { "id": "pr-comms", "name": "PR / communications manager", "score": 50, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["artifact_production", "human_premium"], "note": "Writing automates; crisis judgment and journalist relationships persist.", "sources": ["framework"] }
+        {
+          "id": "copywriter",
+          "name": "Copywriter / content writer (generic)",
+          "score": 90,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "SEO/marketing copy is the canonical automated artifact.",
+          "sources": [
+            "goldman-2023",
+            "aei"
+          ]
+        },
+        {
+          "id": "graphic-designer",
+          "name": "Graphic designer (production work)",
+          "score": 74,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Production design automates; art direction and brand judgment persist in fewer seats.",
+          "sources": [
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "journalist",
+          "name": "Journalist (commodity news)",
+          "score": 62,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "trust_scarcity"
+          ],
+          "note": "Aggregation/rewrite journalism dies; original reporting, sources, and trusted bylines gain value in the synthetic flood.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "video-editor",
+          "name": "Video editor / motion designer",
+          "score": 58,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Cutting/assembly automates fast; taste and narrative judgment persist.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "performer",
+          "name": "Live performer / musician (live)",
+          "score": 15,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "Presence is un-fakeable - live boomed as recorded got free. But income depends on audiences' discretionary spend: high second-order exposure.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "influencer-creator",
+          "name": "Creator / influencer (verified human)",
+          "score": 25,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "low",
+          "mechanisms": [
+            "human_premium",
+            "trust_scarcity"
+          ],
+          "note": "Power-law brutal, but proven-human personality is the scarce asset as feeds go synthetic.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "pr-comms",
+          "name": "PR / communications manager",
+          "score": 50,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "human_premium"
+          ],
+          "note": "Writing automates; crisis judgment and journalist relationships persist.",
+          "sources": [
+            "framework"
+          ]
+        }
       ]
     },
     {
@@ -112,13 +696,126 @@
       "summary": "The most insulated large sector: demand is income-inelastic, state/insurance-funded, demographically growing, and heavily accountability-shielded. Diagnostic/administrative layers transform; hands-on care is the era's structural growth employment.",
       "overall_score": 24,
       "jobs": [
-        { "id": "nurse", "name": "Nurse / hands-on clinical staff", "score": 10, "category": "growing", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["atoms", "human_premium", "accountability_shield"], "note": "Aging demographics + physical presence + trust = the strongest employment story of the transition.", "sources": ["imf-2024", "wef-2025"] },
-        { "id": "physician-diagnostic", "name": "Physician - diagnostic-heavy (radiology, pathology, dermatology)", "score": 45, "category": "transformed", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["accountability_shield", "fast_verification"], "note": "AI reads images superhumanly; liability and certification keep human sign-off. Fewer, more supervisory roles per case volume.", "sources": ["framework"] },
-        { "id": "gp-physician", "name": "General practitioner / patient-facing physician", "score": 22, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["accountability_shield", "human_premium", "atoms"], "note": "Triage/documentation automates (helping, not replacing); examination, trust, and prescription authority stay human.", "sources": ["imf-2024"] },
-        { "id": "medical-coder", "name": "Medical coder / billing", "score": 85, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Pure document-to-code transformation; among the first healthcare roles to automate.", "sources": ["kanungo-2026"] },
-        { "id": "therapist", "name": "Psychotherapist / counselor", "score": 28, "category": "insulated", "timeline": "3-7y", "second_order_risk": "medium", "confidence": "low", "mechanisms": ["human_premium"], "note": "AI companions take the mass market's low end; being witnessed by a human who has stakes remains the premium product. Contested territory.", "sources": ["framework"] },
-        { "id": "elder-care", "name": "Elder care / home care worker", "score": 8, "category": "growing", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms", "human_premium"], "note": "Demographics guarantee demand; funding (state budgets, family income) is the constraint, not automation.", "sources": ["imf-2024"] },
-        { "id": "pharma-researcher", "name": "Pharma / biotech researcher", "score": 35, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["fast_verification", "jevons"], "note": "AI accelerates discovery 10x but trials/regulatory keep humans; likely more total research, differently staffed.", "sources": ["amodei-loving-grace"] }
+        {
+          "id": "nurse",
+          "name": "Nurse / hands-on clinical staff",
+          "score": 10,
+          "category": "growing",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium",
+            "accountability_shield"
+          ],
+          "note": "Aging demographics + physical presence + trust = the strongest employment story of the transition.",
+          "sources": [
+            "imf-2024",
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "physician-diagnostic",
+          "name": "Physician - diagnostic-heavy (radiology, pathology, dermatology)",
+          "score": 45,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "accountability_shield",
+            "fast_verification"
+          ],
+          "note": "AI reads images superhumanly; liability and certification keep human sign-off. Fewer, more supervisory roles per case volume.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "gp-physician",
+          "name": "General practitioner / patient-facing physician",
+          "score": 22,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "accountability_shield",
+            "human_premium",
+            "atoms"
+          ],
+          "note": "Triage/documentation automates (helping, not replacing); examination, trust, and prescription authority stay human.",
+          "sources": [
+            "imf-2024"
+          ]
+        },
+        {
+          "id": "medical-coder",
+          "name": "Medical coder / billing",
+          "score": 85,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Pure document-to-code transformation; among the first healthcare roles to automate.",
+          "sources": [
+            "kanungo-2026"
+          ]
+        },
+        {
+          "id": "therapist",
+          "name": "Psychotherapist / counselor",
+          "score": 28,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "low",
+          "mechanisms": [
+            "human_premium"
+          ],
+          "note": "AI companions take the mass market's low end; being witnessed by a human who has stakes remains the premium product. Contested territory.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "elder-care",
+          "name": "Elder care / home care worker",
+          "score": 8,
+          "category": "growing",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium"
+          ],
+          "note": "Demographics guarantee demand; funding (state budgets, family income) is the constraint, not automation.",
+          "sources": [
+            "imf-2024"
+          ]
+        },
+        {
+          "id": "pharma-researcher",
+          "name": "Pharma / biotech researcher",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "fast_verification",
+            "jevons"
+          ],
+          "note": "AI accelerates discovery 10x but trials/regulatory keep humans; likely more total research, differently staffed.",
+          "sources": [
+            "amodei-loving-grace"
+          ]
+        }
       ]
     },
     {
@@ -127,10 +824,75 @@
       "summary": "Information delivery was already free; AI makes personalized tutoring free too. The surviving product is supervision, motivation, socialization, and credentialing - which is most of what schools actually sell. Mid-tier universities face pipeline collapse as degree-to-job link breaks.",
       "overall_score": 38,
       "jobs": [
-        { "id": "k12-teacher", "name": "K-12 teacher", "score": 20, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["human_premium", "atoms", "accountability_shield"], "note": "Childcare + socialization + motivation is the real product; AI becomes the assistant, not the replacement. State-funded demand.", "sources": ["imf-2024"] },
-        { "id": "university-lecturer", "name": "University lecturer (mid-tier institutions)", "score": 55, "category": "transformed", "timeline": "3-7y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["artifact_production", "demand_collapse"], "note": "Content delivery automates AND the degree-premium erodes as entry-level jobs vanish - double exposure via enrollment collapse.", "sources": ["framework", "stanford-canaries"] },
-        { "id": "tutor", "name": "Private tutor (commodity subjects)", "score": 70, "category": "displaced", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "AI tutoring is free, patient, and personalized; premium survives only bundled with accountability/motivation.", "sources": ["framework"] },
-        { "id": "corporate-trainer", "name": "Corporate trainer / reskilling", "score": 30, "category": "pressured", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["jevons", "human_premium"], "note": "Reskilling demand explodes (WEF: 60% of workers need it); delivery partially automates.", "sources": ["wef-2025"] }
+        {
+          "id": "k12-teacher",
+          "name": "K-12 teacher",
+          "score": 20,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "human_premium",
+            "atoms",
+            "accountability_shield"
+          ],
+          "note": "Childcare + socialization + motivation is the real product; AI becomes the assistant, not the replacement. State-funded demand.",
+          "sources": [
+            "imf-2024"
+          ]
+        },
+        {
+          "id": "university-lecturer",
+          "name": "University lecturer (mid-tier institutions)",
+          "score": 55,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "demand_collapse"
+          ],
+          "note": "Content delivery automates AND the degree-premium erodes as entry-level jobs vanish - double exposure via enrollment collapse.",
+          "sources": [
+            "framework",
+            "stanford-canaries"
+          ]
+        },
+        {
+          "id": "tutor",
+          "name": "Private tutor (commodity subjects)",
+          "score": 70,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "AI tutoring is free, patient, and personalized; premium survives only bundled with accountability/motivation.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "corporate-trainer",
+          "name": "Corporate trainer / reskilling",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "jevons",
+            "human_premium"
+          ],
+          "note": "Reskilling demand explodes (WEF: 59% of workers need training by 2030); delivery partially automates.",
+          "sources": [
+            "wef-2025"
+          ]
+        }
       ]
     },
     {
@@ -139,23 +901,198 @@
       "summary": "The atoms shield: unstructured physical environments defeat robotics for 10-20 years. BUT high second-order exposure - customers are the incomes being squeezed - and a supply flood as displaced knowledge workers retrain inward.",
       "overall_score": 26,
       "jobs": [
-        { "id": "electrician", "name": "Electrician", "score": 15, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms", "accountability_shield"], "note": "Certified, liability-bearing, unstructured-environment work; grid/datacenter buildout adds demand.", "sources": ["goldman-2023", "framework"] },
-        { "id": "plumber", "name": "Plumber / HVAC technician", "score": 15, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms"], "note": "Canonical insulated trade; wage pressure comes from labor supply influx, not robots.", "sources": ["goldman-2023"] },
-        { "id": "construction-worker", "name": "Construction worker (general)", "score": 25, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["atoms", "demand_collapse"], "note": "Prefab and construction robotics arrive late-window; demand tied to building cycles and credit.", "sources": ["goldman-2023"] },
-        { "id": "auto-mechanic", "name": "Vehicle mechanic", "score": 22, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["atoms"], "note": "EV transition shrinks maintenance volume more than AI does; diagnostics get AI-assisted.", "sources": ["framework"] }
+        {
+          "id": "electrician",
+          "name": "Electrician",
+          "score": 15,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "accountability_shield"
+          ],
+          "note": "Certified, liability-bearing, unstructured-environment work; grid/datacenter buildout adds demand.",
+          "sources": [
+            "goldman-2023",
+            "framework"
+          ]
+        },
+        {
+          "id": "plumber",
+          "name": "Plumber / HVAC technician",
+          "score": 15,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "Canonical insulated trade; wage pressure comes from labor supply influx, not robots.",
+          "sources": [
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "construction-worker",
+          "name": "Construction worker (general)",
+          "score": 25,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms",
+            "demand_collapse"
+          ],
+          "note": "Prefab and construction robotics arrive late-window; demand tied to building cycles and credit.",
+          "sources": [
+            "goldman-2023"
+          ]
+        },
+        {
+          "id": "auto-mechanic",
+          "name": "Vehicle mechanic",
+          "score": 22,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "EV transition shrinks maintenance volume more than AI does; diagnostics get AI-assisted.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "architect-civil",
+          "name": "Architect / civil engineer",
+          "score": 45,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "accountability_shield"
+          ],
+          "note": "Goldman puts architecture/engineering at ~37% task exposure: drafting, rendering and code-checking automate; stamped drawings, site liability and permits keep licensed humans.",
+          "sources": [
+            "goldman-2023",
+            "framework"
+          ]
+        }
       ]
     },
     {
       "id": "logistics",
       "name": "Transport, Logistics & Warehousing",
-      "summary": "The physical sector where automation is furthest along: structured environments (warehouses, highways) are robot-friendly. Driving - the largest male occupation in many countries - is on the clock.",
+      "summary": "The physical sector where automation is furthest along: structured environments (warehouses, highways) are robot-friendly. Driving - one of the most common jobs for men across many countries - is on the clock.",
       "overall_score": 55,
       "jobs": [
-        { "id": "truck-driver", "name": "Long-haul truck driver", "score": 60, "category": "transformed", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["atoms", "fast_verification"], "note": "Highway autonomy is the tractable part; first/last mile and liability keep humans in the loop longer than the tech suggests.", "sources": ["framework"] },
-        { "id": "delivery-courier", "name": "Local delivery / courier", "score": 40, "category": "pressured", "timeline": "3-7y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["atoms"], "note": "Unstructured urban last-mile resists robots longest; gig economics compress wages regardless.", "sources": ["framework"] },
-        { "id": "warehouse-worker", "name": "Warehouse worker", "score": 65, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["atoms"], "note": "Structured environment = robotics sweet spot; already deep into automation pre-LLM.", "sources": ["framework"] },
-        { "id": "logistics-planner", "name": "Logistics planner / dispatcher", "score": 72, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production", "fast_verification"], "note": "Optimization is what AI does best; oversight seats remain.", "sources": ["mit-iceberg"] },
-        { "id": "pilot", "name": "Airline pilot", "score": 18, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["accountability_shield"], "note": "The canonical accountability shield: autopilot outflies humans, two pilots stay - certification and public trust move slower than capability.", "sources": ["framework"] }
+        {
+          "id": "truck-driver",
+          "name": "Long-haul truck driver",
+          "score": 60,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms",
+            "fast_verification"
+          ],
+          "note": "Highway autonomy is the tractable part; first/last mile and liability keep humans in the loop longer than the tech suggests.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "delivery-courier",
+          "name": "Local delivery / courier",
+          "score": 40,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "Unstructured urban last-mile resists robots longest; gig economics compress wages regardless.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "warehouse-worker",
+          "name": "Warehouse worker",
+          "score": 65,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "Structured environment = robotics sweet spot; already deep into automation pre-LLM.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "logistics-planner",
+          "name": "Logistics planner / dispatcher",
+          "score": 72,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Optimization is what AI does best; oversight seats remain.",
+          "sources": [
+            "mit-iceberg"
+          ]
+        },
+        {
+          "id": "pilot",
+          "name": "Airline pilot",
+          "score": 18,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "accountability_shield"
+          ],
+          "note": "The canonical accountability shield: autopilot outflies humans, two pilots stay - certification and public trust move slower than capability.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "rideshare-driver",
+          "name": "Taxi / rideshare driver",
+          "score": 70,
+          "category": "displaced",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "fast_verification"
+          ],
+          "note": "Robotaxis are live and expanding city by city; the constraint is rollout capital and regulation, not capability. Gig flexibility made the job easy to enter - and easy to exit invisibly.",
+          "sources": [
+            "framework"
+          ]
+        }
       ]
     },
     {
@@ -164,10 +1101,76 @@
       "summary": "The bottleneck-owner sector: AI buildout competes for grid capacity, making energy the scarce input of the intelligence economy. Structural growth in buildout jobs; a decade-long expansion with physical-world moats.",
       "overall_score": 15,
       "jobs": [
-        { "id": "grid-engineer", "name": "Grid / transmission engineer", "score": 8, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["bottleneck_owner", "atoms"], "note": "Datacenter demand is the fastest-growing grid load in decades; the buildout is the constraint on AI itself.", "sources": ["framework", "goldman-2026"] },
-        { "id": "power-plant-operator", "name": "Power plant / renewables technician", "score": 12, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["bottleneck_owner", "atoms"], "note": "Generation buildout (solar, storage, nuclear restart) is a decade-scale employment program.", "sources": ["goldman-2026"] },
-        { "id": "datacenter-tech", "name": "Datacenter technician / construction", "score": 5, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["bottleneck_owner", "atoms"], "note": "Directly created by the AI capex wave; Goldman notes AI creates jobs in power and datacenter buildout even as it displaces elsewhere.", "sources": ["goldman-2026"] },
-        { "id": "utility-admin", "name": "Utility back-office / billing", "score": 70, "category": "displaced", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "Same admin automation as everywhere; the sector grows while its office shrinks.", "sources": ["goldman-2023"] }
+        {
+          "id": "grid-engineer",
+          "name": "Grid / transmission engineer",
+          "score": 8,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "bottleneck_owner",
+            "atoms"
+          ],
+          "note": "Datacenter demand is the fastest-growing grid load in decades; the buildout is the constraint on AI itself.",
+          "sources": [
+            "framework",
+            "goldman-2026",
+            "eia-2026"
+          ]
+        },
+        {
+          "id": "power-plant-operator",
+          "name": "Power plant / renewables technician",
+          "score": 12,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "bottleneck_owner",
+            "atoms"
+          ],
+          "note": "Generation buildout (solar, storage, nuclear restart) is a decade-scale employment program.",
+          "sources": [
+            "goldman-2026"
+          ]
+        },
+        {
+          "id": "datacenter-tech",
+          "name": "Datacenter technician / construction",
+          "score": 5,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "bottleneck_owner",
+            "atoms"
+          ],
+          "note": "Directly created by the AI capex wave; Goldman notes AI creates jobs in power and datacenter buildout even as it displaces elsewhere.",
+          "sources": [
+            "goldman-2026",
+            "eia-2026"
+          ]
+        },
+        {
+          "id": "utility-admin",
+          "name": "Utility back-office / billing",
+          "score": 70,
+          "category": "displaced",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "Same admin automation as everywhere; the sector grows while its office shrinks.",
+          "sources": [
+            "goldman-2023"
+          ]
+        }
       ]
     },
     {
@@ -176,10 +1179,71 @@
       "summary": "Pre-automated by previous waves; LLM-era effect concentrates on the office layer (planning, procurement, quality documentation) and accelerates via robotics late in the window. Reshoring + automation = output up, jobs flat.",
       "overall_score": 42,
       "jobs": [
-        { "id": "factory-operator", "name": "Machine operator / assembler", "score": 45, "category": "transformed", "timeline": "3-7y", "second_order_risk": "medium", "confidence": "medium", "mechanisms": ["atoms"], "note": "Next robotics generation (vision-language-action models) extends automation to smaller-batch work.", "sources": ["framework"] },
-        { "id": "industrial-engineer", "name": "Industrial / process engineer", "score": 35, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["slow_verification", "atoms"], "note": "Physical-world verification keeps humans; AI compresses the analysis layer.", "sources": ["framework"] },
-        { "id": "quality-inspector", "name": "Quality inspector (visual/documentation)", "score": 68, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["fast_verification"], "note": "Vision AI outperforms humans at defect detection; compliance documentation persists as human-signed.", "sources": ["framework"] },
-        { "id": "procurement", "name": "Procurement / supply chain analyst", "score": 66, "category": "transformed", "timeline": "1-3y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["artifact_production"], "note": "MIT Iceberg Index flags logistics/admin as the quiet bulk of exposure.", "sources": ["mit-iceberg"] }
+        {
+          "id": "factory-operator",
+          "name": "Machine operator / assembler",
+          "score": 45,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "Next robotics generation (vision-language-action models) extends automation to smaller-batch work.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "industrial-engineer",
+          "name": "Industrial / process engineer",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "slow_verification",
+            "atoms"
+          ],
+          "note": "Physical-world verification keeps humans; AI compresses the analysis layer.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "quality-inspector",
+          "name": "Quality inspector (visual/documentation)",
+          "score": 68,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "fast_verification"
+          ],
+          "note": "Vision AI outperforms humans at defect detection; compliance documentation persists as human-signed.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "procurement",
+          "name": "Procurement / supply chain analyst",
+          "score": 66,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "artifact_production"
+          ],
+          "note": "MIT Iceberg Index flags logistics/admin as the quiet bulk of exposure.",
+          "sources": [
+            "mit-iceberg"
+          ]
+        }
       ]
     },
     {
@@ -188,11 +1252,126 @@
       "summary": "Low direct automation (atoms + human premium) but the sector most exposed to the demand-collapse second order: it lives on discretionary spending of exactly the incomes being squeezed. The K-shape hits here first - discount and luxury thrive, the middle dies.",
       "overall_score": 40,
       "jobs": [
-        { "id": "chef-cook", "name": "Chef / cook", "score": 25, "category": "insulated", "timeline": "7-15y", "second_order_risk": "high", "confidence": "high", "mechanisms": ["atoms", "human_premium", "demand_collapse"], "note": "Kitchen robotics stay niche; restaurant demand tracks household income - the automation-proof job with automation-exposed customers.", "sources": ["framework"] },
-        { "id": "waiter", "name": "Waiter / front-of-house", "score": 35, "category": "pressured", "timeline": "3-7y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["human_premium", "demand_collapse"], "note": "Human service is part of the premium product; volume segment thins with discretionary spend.", "sources": ["framework"] },
-        { "id": "retail-cashier", "name": "Retail cashier", "score": 80, "category": "displaced", "timeline": "now", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms"], "note": "WEF fastest-declining list; self-checkout + e-commerce, accelerated by cost pressure.", "sources": ["wef-2025"] },
-        { "id": "hotel-staff", "name": "Hotel / tourism staff", "score": 30, "category": "pressured", "timeline": "3-7y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["human_premium", "demand_collapse"], "note": "Hospitality is presence work; demand tracks travel budgets. Experience economy grows at the premium end.", "sources": ["framework"] },
-        { "id": "barista", "name": "Barista / cafe worker", "score": 32, "category": "pressured", "timeline": "3-7y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["human_premium", "demand_collapse"], "note": "The canonical second-order case: the job survives automation and loses its customers' salaries.", "sources": ["framework"] }
+        {
+          "id": "chef-cook",
+          "name": "Chef / cook",
+          "score": 25,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "high",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "Kitchen robotics stay niche; restaurant demand tracks household income - the automation-proof job with automation-exposed customers.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "waiter",
+          "name": "Waiter / front-of-house",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "Human service is part of the premium product; volume segment thins with discretionary spend.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "retail-cashier",
+          "name": "Retail cashier",
+          "score": 80,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "WEF fastest-declining list; self-checkout + e-commerce, accelerated by cost pressure.",
+          "sources": [
+            "wef-2025"
+          ]
+        },
+        {
+          "id": "hotel-staff",
+          "name": "Hotel / tourism staff",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "Hospitality is presence work; demand tracks travel budgets. Experience economy grows at the premium end.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "barista",
+          "name": "Barista / cafe worker",
+          "score": 32,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "The canonical second-order case: the job survives automation and loses its customers' salaries.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "fastfood-counter",
+          "name": "Fast-food / counter worker",
+          "score": 78,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "artifact_production"
+          ],
+          "note": "Kiosks, app ordering and voice-AI drive-thrus are deployed at scale; kitchen automation follows at the volume end. One of the largest food-service employment segments.",
+          "sources": [
+            "wef-2025",
+            "framework"
+          ]
+        },
+        {
+          "id": "retail-salesperson",
+          "name": "Retail salesperson (floor)",
+          "score": 60,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium"
+          ],
+          "note": "E-commerce and self-service keep shrinking floor headcount - a pre-AI trend AI accelerates; experiential and high-touch retail persist at the premium end.",
+          "sources": [
+            "wef-2025"
+          ]
+        }
       ]
     },
     {
@@ -201,10 +1380,93 @@
       "summary": "Protected by politics and process, not capability: public employment changes by legislation, not market pressure. Back-office automates slowly; the sector may become an employer of last resort during the transition - while its wage-tax funding base erodes.",
       "overall_score": 30,
       "jobs": [
-        { "id": "civil-servant-admin", "name": "Administrative civil servant", "score": 45, "category": "transformed", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["artifact_production", "accountability_shield"], "note": "High task overlap, low displacement speed: unions, law, and politics stretch the timeline; attrition-based shrinkage.", "sources": ["mit-iceberg"] },
-        { "id": "police-emergency", "name": "Police / emergency services", "score": 12, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["atoms", "accountability_shield", "human_premium"], "note": "Physical presence + state authority + accountability; AI augments (analysis, dispatch) rather than replaces.", "sources": ["framework"] },
-        { "id": "regulator-inspector", "name": "Regulator / inspector (incl. AI oversight)", "score": 10, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["trust_scarcity", "accountability_shield"], "note": "Every AI harm generates rules; rules generate inspectors. State AI-evaluation capacity is a new hiring category.", "sources": ["framework"] },
-        { "id": "military", "name": "Military personnel", "score": 30, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "low", "mechanisms": ["atoms", "accountability_shield"], "note": "Drone/autonomy shift restructures force composition; headcount politics are national, not economic.", "sources": ["framework"] }
+        {
+          "id": "civil-servant-admin",
+          "name": "Administrative civil servant",
+          "score": 45,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "accountability_shield"
+          ],
+          "note": "High task overlap, low displacement speed: unions, law, and politics stretch the timeline; attrition-based shrinkage.",
+          "sources": [
+            "mit-iceberg"
+          ]
+        },
+        {
+          "id": "police-emergency",
+          "name": "Police / emergency services",
+          "score": 12,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "accountability_shield",
+            "human_premium"
+          ],
+          "note": "Physical presence + state authority + accountability; AI augments (analysis, dispatch) rather than replaces.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "regulator-inspector",
+          "name": "Regulator / inspector (incl. AI oversight)",
+          "score": 10,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "trust_scarcity",
+            "accountability_shield"
+          ],
+          "note": "Every AI harm generates rules; rules generate inspectors. State AI-evaluation capacity is a new hiring category.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "military",
+          "name": "Military personnel",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "low",
+          "mechanisms": [
+            "atoms",
+            "accountability_shield"
+          ],
+          "note": "Drone/autonomy shift restructures force composition; headcount politics are national, not economic.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "social-worker",
+          "name": "Social worker / caseworker",
+          "score": 15,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "human_premium",
+            "accountability_shield"
+          ],
+          "note": "State-funded human judgment over vulnerable lives; caseload tools augment rather than replace. Demand rises with transition stress - funding, not automation, is the constraint.",
+          "sources": [
+            "imf-2024",
+            "framework"
+          ]
+        }
       ]
     },
     {
@@ -213,8 +1475,39 @@
       "summary": "Small employment share in advanced economies, high strategic importance. Precision agriculture is a genuinely beneficial AI application; labor effects modest in the window, climate is the bigger variable.",
       "overall_score": 25,
       "jobs": [
-        { "id": "farmer", "name": "Farmer / farm operator", "score": 20, "category": "insulated", "timeline": "7-15y", "second_order_risk": "low", "confidence": "high", "mechanisms": ["atoms", "bottleneck_owner"], "note": "Owns land (the bottleneck); AI improves yields and margins rather than replacing the owner-operator.", "sources": ["imf-2024"] },
-        { "id": "farm-laborer", "name": "Seasonal farm laborer", "score": 35, "category": "pressured", "timeline": "3-7y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["atoms"], "note": "Picking robotics improving but slow; unstructured outdoor work is robotics' hardest case.", "sources": ["aei-labor"] }
+        {
+          "id": "farmer",
+          "name": "Farmer / farm operator",
+          "score": 20,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "bottleneck_owner"
+          ],
+          "note": "Owns land (the bottleneck); AI improves yields and margins rather than replacing the owner-operator.",
+          "sources": [
+            "imf-2024"
+          ]
+        },
+        {
+          "id": "farm-laborer",
+          "name": "Seasonal farm laborer",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms"
+          ],
+          "note": "Picking robotics improving but slow; unstructured outdoor work is robotics' hardest case.",
+          "sources": [
+            "aei-labor"
+          ]
+        }
       ]
     },
     {
@@ -223,11 +1516,93 @@
       "summary": "The human-premium economy in embryo: bodies, presence, and touch. Automation-immune, demand-exposed - the sector where the post-transition household loop reorganizes if income pipes get rebuilt.",
       "overall_score": 28,
       "jobs": [
-        { "id": "hairdresser", "name": "Hairdresser / barber / beautician", "score": 12, "category": "insulated", "timeline": "7-15y", "second_order_risk": "high", "confidence": "high", "mechanisms": ["atoms", "human_premium", "demand_collapse"], "note": "Touch + trust + presence; demand tracks disposable income.", "sources": ["framework"] },
-        { "id": "personal-trainer", "name": "Personal trainer / coach", "score": 25, "category": "insulated", "timeline": "3-7y", "second_order_risk": "high", "confidence": "medium", "mechanisms": ["human_premium", "demand_collapse"], "note": "AI coaches take the info layer; accountability-to-a-human is the surviving product.", "sources": ["framework"] },
-        { "id": "childcare", "name": "Childcare worker", "score": 8, "category": "growing", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms", "human_premium", "accountability_shield"], "note": "Nobody delegates children to robots; chronically undersupplied, state-subsidized in Europe.", "sources": ["framework"] },
-        { "id": "massage-physio", "name": "Massage therapist / physiotherapist", "score": 12, "category": "insulated", "timeline": "7-15y", "second_order_risk": "medium", "confidence": "high", "mechanisms": ["atoms", "human_premium"], "note": "Touch is the product; partially health-system funded (insulating the demand side).", "sources": ["framework"] },
-        { "id": "craftsperson", "name": "Artisan / craftsperson (verified human-made)", "score": 20, "category": "insulated", "timeline": "3-7y", "second_order_risk": "high", "confidence": "low", "mechanisms": ["human_premium", "trust_scarcity"], "note": "The 'last human premium': handmade as luxury category, growing as machine-made floods. Small in volume, culturally large.", "sources": ["framework"] }
+        {
+          "id": "hairdresser",
+          "name": "Hairdresser / barber / beautician",
+          "score": 12,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "high",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "Touch + trust + presence; demand tracks disposable income.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "personal-trainer",
+          "name": "Personal trainer / coach",
+          "score": 25,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium",
+            "demand_collapse"
+          ],
+          "note": "AI coaches take the info layer; accountability-to-a-human is the surviving product.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "childcare",
+          "name": "Childcare worker",
+          "score": 8,
+          "category": "growing",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium",
+            "accountability_shield"
+          ],
+          "note": "Nobody delegates children to robots; chronically undersupplied, state-subsidized in Europe.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "massage-physio",
+          "name": "Massage therapist / physiotherapist",
+          "score": 12,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "medium",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "human_premium"
+          ],
+          "note": "Touch is the product; partially health-system funded (insulating the demand side).",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "craftsperson",
+          "name": "Artisan / craftsperson (verified human-made)",
+          "score": 20,
+          "category": "insulated",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "low",
+          "mechanisms": [
+            "human_premium",
+            "trust_scarcity"
+          ],
+          "note": "The 'last human premium': handmade as luxury category, growing as machine-made floods. Small in volume, culturally large.",
+          "sources": [
+            "framework"
+          ]
+        }
       ]
     },
     {
@@ -236,12 +1611,300 @@
       "summary": "The jobs the transition creates: building, powering, securing, verifying, and governing the machine loop - plus directing it. Small in headcount relative to what's displaced (the core distribution problem), but the fastest-growing wage premium in the market.",
       "overall_score": 5,
       "jobs": [
-        { "id": "ai-engineer", "name": "AI/ML engineer (applied)", "score": 15, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["jevons"], "note": "Peak demand window now-2028 as every company integrates; commoditizes later as tooling matures - the premium has a half-life.", "sources": ["aei"] },
-        { "id": "agent-orchestrator", "name": "AI agent orchestrator / director", "score": 5, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["jevons"], "note": "Anthropic itself hires 'orchestrators of Claudes' - directing fleets is the new senior skill across every white-collar domain.", "sources": ["island-2025"] },
-        { "id": "ai-auditor", "name": "AI auditor / compliance specialist", "score": 3, "category": "growing", "timeline": "now", "second_order_risk": "low", "confidence": "high", "mechanisms": ["trust_scarcity", "accountability_shield"], "note": "EU AI Act + liability law + insurance = mandatory evidence industry; the audit layer of the AI economy.", "sources": ["framework"] },
-        { "id": "robotics-tech", "name": "Robotics technician / integrator", "score": 8, "category": "growing", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["atoms", "jevons"], "note": "The physical-AI wave needs installers, maintainers, integrators - the electricians of the robot economy.", "sources": ["framework"] },
-        { "id": "data-curator", "name": "Data curation / RLHF / model training specialist", "score": 30, "category": "pressured", "timeline": "1-3y", "second_order_risk": "low", "confidence": "medium", "mechanisms": ["jevons"], "note": "Growing now, but synthetic data and automated pipelines compress it - a transitional job category.", "sources": ["framework"] },
-        { "id": "verification-services", "name": "Human verification / provenance services", "score": 5, "category": "growing", "timeline": "1-3y", "second_order_risk": "low", "confidence": "low", "mechanisms": ["trust_scarcity"], "note": "Identity, proven-human credentials, content provenance: the consumer trust layer, small now, structural by 2030.", "sources": ["framework"] }
+        {
+          "id": "ai-engineer",
+          "name": "AI/ML engineer (applied)",
+          "score": 15,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "jevons"
+          ],
+          "note": "Peak demand window now-2028 as every company integrates; commoditizes later as tooling matures - the premium has a half-life.",
+          "sources": [
+            "aei"
+          ]
+        },
+        {
+          "id": "agent-orchestrator",
+          "name": "AI agent orchestrator / director",
+          "score": 5,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "jevons"
+          ],
+          "note": "Anthropic engineers already orchestrate fleets of Claudes - directing agent fleets is the new senior skill across every white-collar domain.",
+          "sources": [
+            "island-2025"
+          ]
+        },
+        {
+          "id": "ai-auditor",
+          "name": "AI auditor / compliance specialist",
+          "score": 3,
+          "category": "growing",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "high",
+          "mechanisms": [
+            "trust_scarcity",
+            "accountability_shield"
+          ],
+          "note": "EU AI Act + liability law + insurance = mandatory evidence industry; the audit layer of the AI economy.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "robotics-tech",
+          "name": "Robotics technician / integrator",
+          "score": 8,
+          "category": "growing",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms",
+            "jevons"
+          ],
+          "note": "The physical-AI wave needs installers, maintainers, integrators - the electricians of the robot economy.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "data-curator",
+          "name": "Data curation / RLHF / model training specialist",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "jevons"
+          ],
+          "note": "Growing now, but synthetic data and automated pipelines compress it - a transitional job category.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "verification-services",
+          "name": "Human verification / provenance services",
+          "score": 5,
+          "category": "growing",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "low",
+          "mechanisms": [
+            "trust_scarcity"
+          ],
+          "note": "Identity, proven-human credentials, content provenance: the consumer trust layer, small now, structural by 2030.",
+          "sources": [
+            "framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "management",
+      "name": "Management & Consulting",
+      "summary": "The coordination layer is the quiet bulk of white-collar exposure: reporting, status, planning and deck production automate, so spans of control widen and layers collapse. What survives is outcome ownership - deciding, being accountable, managing humans.",
+      "overall_score": 50,
+      "jobs": [
+        {
+          "id": "middle-manager",
+          "name": "Middle manager (coordination layer)",
+          "score": 55,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "accountability_shield"
+          ],
+          "note": "Reporting, status-chasing and planning automate; MIT Iceberg flags admin/coordination as the hidden bulk of exposure. Flatter orgs, wider spans, fewer layers.",
+          "sources": [
+            "mit-iceberg",
+            "framework"
+          ]
+        },
+        {
+          "id": "management-consultant",
+          "name": "Management consultant (research & decks)",
+          "score": 60,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "jevons"
+          ],
+          "note": "Research, benchmarking and deck production - the junior pyramid's output - are core LLM strengths, and Amodei named consulting among the exposed. Senior judgment and the blame-shield function persist.",
+          "sources": [
+            "amodei-axios",
+            "framework"
+          ]
+        },
+        {
+          "id": "executive",
+          "name": "Executive / P&L owner",
+          "score": 15,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "accountability_shield"
+          ],
+          "note": "Outcome ownership concentrates; AI multiplies the leverage of whoever holds accountability. Fewer intermediate rungs to get there - the ladder problem moves up.",
+          "sources": [
+            "framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "Sales & Business Development",
+      "summary": "Outbound prospecting and qualification - volume work with checkable output - automates first (the AI-SDR wave), even as response rates to all outbound collapse. Relationship trust at enterprise scale persists but thins.",
+      "overall_score": 55,
+      "jobs": [
+        {
+          "id": "sdr",
+          "name": "Sales development rep (outbound)",
+          "score": 85,
+          "category": "displaced",
+          "timeline": "now",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "fast_verification"
+          ],
+          "note": "Personalized outreach at scale is exactly what LLMs do; AI SDRs work the top of funnel while response rates to all outbound collapse - the channel automates and degrades simultaneously.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "account-exec",
+          "name": "Enterprise account executive",
+          "score": 32,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "human_premium"
+          ],
+          "note": "Large-deal trust and multi-stakeholder navigation stay human; fewer, more senior seats as AI handles research, proposals and follow-up. Quota economics compress.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "insurance-agent",
+          "name": "Insurance agent / broker (personal lines)",
+          "score": 58,
+          "category": "transformed",
+          "timeline": "1-3y",
+          "second_order_risk": "low",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "human_premium"
+          ],
+          "note": "Comparison, quoting and standard policies automate; complex commercial risk and claims advocacy keep human brokers.",
+          "sources": [
+            "goldman-2023",
+            "framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "real-estate",
+      "name": "Real Estate, Property & Facilities",
+      "summary": "A second-order sector in disguise: property income tracks the office economy. Valuation, matching and paperwork automate while the physical layer (cleaning, security, maintenance) stays human - but both depend on buildings staying occupied by paid workers.",
+      "overall_score": 35,
+      "jobs": [
+        {
+          "id": "real-estate-agent",
+          "name": "Real estate agent / broker",
+          "score": 48,
+          "category": "transformed",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "artifact_production",
+            "human_premium"
+          ],
+          "note": "Search, valuation and transaction paperwork automate; trust and negotiation persist for the largest purchase of most lives. Commissions compress; volume tracks the economy.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "property-manager",
+          "name": "Property manager (commercial)",
+          "score": 35,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "high",
+          "confidence": "medium",
+          "mechanisms": [
+            "demand_collapse",
+            "atoms"
+          ],
+          "note": "The admin layer automates; the deeper exposure is demand - commercial property income depends on office headcount that AI is thinning. Residential is more stable.",
+          "sources": [
+            "framework"
+          ]
+        },
+        {
+          "id": "janitor-cleaner",
+          "name": "Janitor / commercial cleaner",
+          "score": 22,
+          "category": "insulated",
+          "timeline": "7-15y",
+          "second_order_risk": "high",
+          "confidence": "high",
+          "mechanisms": [
+            "atoms",
+            "demand_collapse"
+          ],
+          "note": "Unstructured physical work robots handle poorly (Goldman: ~1% task exposure) - but demand is square meters of occupied office, exactly what white-collar automation empties. Insulated from robots, exposed to vacancy.",
+          "sources": [
+            "goldman-2023",
+            "framework"
+          ]
+        },
+        {
+          "id": "security-guard",
+          "name": "Security guard",
+          "score": 30,
+          "category": "pressured",
+          "timeline": "3-7y",
+          "second_order_risk": "medium",
+          "confidence": "medium",
+          "mechanisms": [
+            "atoms",
+            "accountability_shield"
+          ],
+          "note": "AI surveillance multiplies coverage per guard; physical presence and liability keep a floor. Site count tracks the same office economy.",
+          "sources": [
+            "framework"
+          ]
+        }
       ]
     }
   ]

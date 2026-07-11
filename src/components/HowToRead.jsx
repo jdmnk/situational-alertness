@@ -8,7 +8,7 @@ const FATE_LINES = {
   growing: 'demand for this work is created or expanded by AI.',
 }
 
-export default function HowToRead({ categories }) {
+export default function HowToRead({ categories, rangeNote }) {
   return (
     <section id="how-to-read" className="mt-16 scroll-mt-4">
       <h2 className="font-serif text-2xl font-bold">How to read this</h2>
@@ -33,6 +33,7 @@ export default function HowToRead({ categories }) {
               </li>
             ))}
           </ul>
+          {rangeNote && <p className="mt-2 text-xs text-neutral-400">{rangeNote}</p>}
 
           <h3 className="mt-6 text-xs font-semibold uppercase tracking-wide text-neutral-500">
             Extra marks

@@ -4,7 +4,7 @@
 //
 // posthog-js is ~75KB gzipped, so it's dynamically imported to keep it out
 // of the main bundle; events fired before it loads are queued.
-const KEY = 'phc_REPLACE_ME'
+const KEY = 'phc_v7qk5xmHTBgGMsuhSZYQTMtNY75Ec7zeDk9cyw5kjj9v'
 const enabled = KEY.startsWith('phc_') && !KEY.includes('REPLACE')
 
 let client = null

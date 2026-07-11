@@ -10,9 +10,11 @@ measurements — see the Methodology section on the site.
 
 ## Stack
 
-- React + [d3-hierarchy](https://github.com/d3/d3-hierarchy) (partition layout; React renders, D3 computes)
+- React; the map is an "economy at a glance" proportional strip plus a board of
+  industry sections with readable, color-coded job tiles (same pattern on
+  desktop and mobile)
 - Tailwind CSS 4, Vite
-- Static — no backend, no trackers
+- Static — no backend; anonymous, cookieless analytics via PostHog EU
 
 ## Data
 

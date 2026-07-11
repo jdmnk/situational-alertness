@@ -68,7 +68,7 @@ export default function Controls({ categories, view, catActive, timeActive, onTo
           onChange={(e) => onUpdate({ q: e.target.value })}
           placeholder="Search jobs…"
           aria-label="Search job names"
-          className="w-40 rounded-md border border-neutral-300 bg-white px-2.5 py-1 text-sm placeholder:text-neutral-400"
+          className="w-44 rounded-md sm:w-56 border border-neutral-300 bg-white px-2.5 py-1 text-sm placeholder:text-neutral-400"
         />
       </div>
     </div>

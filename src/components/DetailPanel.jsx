@@ -19,18 +19,10 @@ function Chip({ color, children }) {
 export default function DetailPanel({ selected, meta, sources, onClose, variant }) {
   const wrapperClass =
     variant === 'sheet'
-      ? 'fixed inset-x-0 bottom-0 z-50 max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-neutral-200 bg-white p-5 shadow-[0_-8px_30px_rgba(0,0,0,.15)]'
-      : 'sticky top-4 h-fit rounded-xl border border-neutral-200 bg-white p-5'
+      ? 'slide-up fixed inset-x-0 bottom-0 z-50 max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-neutral-200 bg-white p-5 shadow-[0_-8px_30px_rgba(0,0,0,.15)]'
+      : 'slide-in fixed right-0 top-0 z-50 h-full w-[26rem] max-w-[92vw] overflow-y-auto bg-white p-6 shadow-2xl'
 
-  if (!selected) {
-    return (
-      <aside className={wrapperClass}>
-        <p className="text-sm text-neutral-500">
-          Click a job cell to see its score, timeline, mechanisms, and sources.
-        </p>
-      </aside>
-    )
-  }
+  if (!selected) return null
 
   const { job, industry } = selected
   const categories = meta.scoring.categories

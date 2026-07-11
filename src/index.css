@@ -33,9 +33,26 @@ body {
   );
 }
 
-.cell-transition {
-  transition:
-    left 320ms ease,
-    width 320ms ease,
-    opacity 320ms ease;
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.slide-in {
+  animation: slide-in 220ms ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.slide-up {
+  animation: slide-up 220ms ease-out;
 }

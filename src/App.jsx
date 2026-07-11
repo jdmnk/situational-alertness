@@ -4,8 +4,8 @@ import { findJob, validateData } from './lib/data'
 import { DEFAULT_STATE, parseHash, serializeHash } from './lib/urlState'
 import Hero from './components/Hero'
 import Controls from './components/Controls'
-import Icicle from './components/Icicle'
-import MobileMap from './components/MobileMap'
+import EconomyStrip from './components/EconomyStrip'
+import Board from './components/Board'
 import DetailPanel from './components/DetailPanel'
 import HowToRead from './components/HowToRead'
 import Methodology from './components/Methodology'
@@ -125,6 +125,13 @@ export default function App() {
     [update],
   )
 
+  // Close the detail panel with Escape.
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && selectJob(null)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [selectJob])
+
   if (error) {
     return (
       <div className="mx-auto max-w-xl px-6 py-24 text-center">
@@ -153,44 +160,33 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6">
         <section id="map" className="scroll-mt-4">
-          <Controls
-            categories={categories}
-            view={view}
-            catActive={catActive}
-            timeActive={timeActive}
-            onToggleCat={toggleCat}
-            onUpdate={update}
-          />
-          {isMobile ? (
-            <MobileMap
+          <div className="sticky top-0 z-30 -mx-4 mb-4 border-b border-neutral-200/70 bg-[#f7f6f3]/90 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+            <Controls
+              categories={categories}
+              view={view}
+              catActive={catActive}
+              timeActive={timeActive}
+              onToggleCat={toggleCat}
+              onUpdate={update}
+            />
+          </div>
+          {!isMobile && (
+            <EconomyStrip
               industries={sortedIndustries}
               meta={data.meta}
-              isMatch={isMatch}
-              selectedJobId={view.job}
-              focusId={view.industry}
-              onSelectJob={selectJob}
-              onFocus={focusIndustry}
+              onJump={focusIndustry}
             />
-          ) : (
-            <div className="grid grid-cols-[1fr_320px] gap-6">
-              <Icicle
-                industries={sortedIndustries}
-                meta={data.meta}
-                focusId={view.industry}
-                selectedJobId={view.job}
-                isMatch={isMatch}
-                onFocus={focusIndustry}
-                onSelectJob={selectJob}
-              />
-              <DetailPanel
-                selected={selected}
-                meta={data.meta}
-                sources={sources}
-                onClose={() => selectJob(null)}
-                variant="side"
-              />
-            </div>
           )}
+          <Board
+            industries={sortedIndustries}
+            meta={data.meta}
+            isMatch={isMatch}
+            selectedJobId={view.job}
+            focusId={view.industry}
+            onSelectJob={selectJob}
+            onFocus={focusIndustry}
+            accordion={isMobile}
+          />
         </section>
 
         <HowToRead categories={categories} />
@@ -200,14 +196,21 @@ export default function App() {
 
       <Footer meta={data.meta} />
 
-      {isMobile && selected && (
-        <DetailPanel
-          selected={selected}
-          meta={data.meta}
-          sources={sources}
-          onClose={() => selectJob(null)}
-          variant="sheet"
-        />
+      {selected && (
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/25"
+            onClick={() => selectJob(null)}
+            aria-hidden
+          />
+          <DetailPanel
+            selected={selected}
+            meta={data.meta}
+            sources={sources}
+            onClose={() => selectJob(null)}
+            variant={isMobile ? 'sheet' : 'drawer'}
+          />
+        </>
       )}
     </div>
   )

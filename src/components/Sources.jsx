@@ -18,7 +18,7 @@ export default function Sources({ sources }) {
               {byGroup(g).map((s) => (
                 <article
                   key={s.id}
-                  className="rounded-xl border border-neutral-200 bg-white p-4"
+                  className="rounded-xl border border-neutral-800 bg-neutral-900 p-4"
                 >
                   <h4 className="text-sm font-bold leading-snug">
                     {s.url ? (
@@ -38,7 +38,7 @@ export default function Sources({ sources }) {
                     {[s.publisher, s.year].filter(Boolean).join(' · ')} ·{' '}
                     <code className="text-[10px]">{s.id}</code>
                   </p>
-                  <p className="mt-2 text-xs leading-relaxed text-neutral-600">{s.summary}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-neutral-400">{s.summary}</p>
                 </article>
               ))}
             </div>

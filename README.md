@@ -1,6 +1,6 @@
-# Situational Alertness — AI Economic Impact Map
+# Situational Readiness — AI Economic Impact Map
 
-**Live: https://jdmnk.github.io/situational-alertness/**
+**Live: https://jdmnk.github.io/situational-readiness/**
 
 An interactive single-page site that maps how AI affects the economy, top-down:
 **economy → industries → jobs**, each colored by one of five fates —
@@ -12,9 +12,10 @@ measurements — see the Methodology section on the site.
 
 ## Stack
 
-- React; the map is an "economy at a glance" proportional strip plus a board of
-  industry sections with readable, color-coded job tiles (same pattern on
-  desktop and mobile)
+- React + d3-hierarchy; the map is a dark, full-width squarified treemap
+  (industry blocks containing job cells, area ∝ jobs mapped) with color
+  "layers" toggling between automation fate, second-order exposure, timeline,
+  and confidence — inspired by karpathy.ai/jobs
 - Tailwind CSS 4, Vite
 - Static — no backend; anonymous, cookieless analytics via PostHog EU
 

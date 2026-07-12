@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AI Economic Impact Map",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "updated": "2026-07-11",
     "description": "Hierarchical dataset of industries and occupations with AI impact assessments. Scores are editorial estimates synthesized from cited research (see sources) plus a mechanism-based framework (verification speed, artifact-vs-outcome work, demand-side second-order effects). Intended for a zoomable tree/icicle visualization.",
     "scoring": {
@@ -49,6 +49,38 @@
         "high": {
           "color": "#c0392b",
           "label": "High indirect exposure"
+        }
+      },
+      "timeline_levels": {
+        "now": {
+          "color": "#c0392b",
+          "label": "Effect visible now"
+        },
+        "1-3y": {
+          "color": "#e67e22",
+          "label": "Visible in 1-3 years"
+        },
+        "3-7y": {
+          "color": "#f1c40f",
+          "label": "Visible in 3-7 years"
+        },
+        "7-15y": {
+          "color": "#27ae60",
+          "label": "Visible in 7-15 years"
+        }
+      },
+      "confidence_levels": {
+        "high": {
+          "color": "#d5dbdb",
+          "label": "Well-supported by current data"
+        },
+        "medium": {
+          "color": "#7f8c8d",
+          "label": "Reasoned extrapolation"
+        },
+        "low": {
+          "color": "#34495e",
+          "label": "Framework judgment, little data"
         }
       }
     },

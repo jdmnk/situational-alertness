@@ -19,8 +19,8 @@ function Chip({ color, children }) {
 export default function DetailPanel({ selected, meta, sources, onClose, variant }) {
   const wrapperClass =
     variant === 'sheet'
-      ? 'slide-up fixed inset-x-0 bottom-0 z-50 max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-neutral-200 bg-white p-5 shadow-[0_-8px_30px_rgba(0,0,0,.15)]'
-      : 'slide-in fixed right-0 top-0 z-50 h-full w-[26rem] max-w-[92vw] overflow-y-auto bg-white p-6 shadow-2xl'
+      ? 'slide-up fixed inset-x-0 bottom-0 z-50 max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-neutral-800 bg-neutral-900 p-5 shadow-[0_-8px_30px_rgba(0,0,0,.15)]'
+      : 'slide-in fixed right-0 top-0 z-50 h-full w-[26rem] max-w-[92vw] overflow-y-auto bg-neutral-900 p-6 shadow-2xl'
 
   if (!selected) return null
 
@@ -39,7 +39,7 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
         <button
           onClick={onClose}
           aria-label="Close details"
-          className="rounded-md px-2 py-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700"
+          className="rounded-md px-2 py-1 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200"
         >
           ✕
         </button>
@@ -75,13 +75,13 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
         </div>
       </dl>
 
-      <p className="mt-4 border-l-2 border-neutral-300 pl-3 text-sm leading-relaxed text-neutral-700">
+      <p className="mt-4 border-l-2 border-neutral-600 pl-3 text-sm leading-relaxed text-neutral-300">
         {job.note}
       </p>
 
       {job.second_order_channels?.length > 0 && (
-        <div className="mt-4 rounded-lg bg-amber-50 p-3">
-          <h4 className="text-xs font-semibold uppercase tracking-wide text-amber-800">
+        <div className="mt-4 rounded-lg bg-amber-500/10 p-3">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-amber-300">
             How this job gets hit indirectly
           </h4>
           <ul className="mt-2 space-y-2">
@@ -93,7 +93,7 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
                   <span className="font-semibold">
                     {ch.glyph} {ch.label}
                   </span>
-                  <span className="block text-xs leading-snug text-neutral-600">
+                  <span className="block text-xs leading-snug text-neutral-400">
                     {ch.description}
                   </span>
                 </li>
@@ -150,7 +150,7 @@ export default function DetailPanel({ selected, meta, sources, onClose, variant 
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-700 underline decoration-blue-300 underline-offset-2 hover:decoration-blue-700"
+                      className="text-sky-400 underline decoration-sky-800 underline-offset-2 hover:decoration-sky-400"
                     >
                       {s.title}
                     </a>

@@ -4,11 +4,11 @@
 
 function ChannelCard({ ch, examples }) {
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-4">
+    <div className="rounded-xl border border-neutral-800 bg-neutral-900 p-4">
       <h4 className="text-sm font-bold">
         <span aria-hidden>{ch.glyph}</span> {ch.label}
       </h4>
-      <p className="mt-1.5 text-xs leading-relaxed text-neutral-600">{ch.description}</p>
+      <p className="mt-1.5 text-xs leading-relaxed text-neutral-400">{ch.description}</p>
       {examples.length > 0 && (
         <p className="mt-2 text-xs text-neutral-400">
           e.g. {examples.slice(0, 3).join(' · ')}
@@ -35,7 +35,7 @@ export default function SecondWave({ meta, industries }) {
   return (
     <section id="second-wave" className="mt-16 scroll-mt-4">
       <h2 className="font-serif text-2xl font-bold">The second wave</h2>
-      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-700">
+      <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-300">
         Task-exposure studies answer one question: can AI do this job? But &ldquo;the robots
         can&rsquo;t do my job&rdquo; is not the same as &ldquo;my job is safe.&rdquo; When AI
         automates desk work, the shock travels outward through the economy along channels that
@@ -62,11 +62,13 @@ export default function SecondWave({ meta, industries }) {
         </div>
       </div>
 
-      <p className="mt-5 max-w-3xl text-sm text-neutral-700">
-        On the map, every job carries this as a small colored badge — green, yellow or red for
-        how hard the second wave hits, with the channel icons saying why. A green tile with a
-        red badge is the map&rsquo;s most important pattern: safe from the robots, exposed to
-        everything downstream of them.
+      <p className="mt-5 max-w-3xl text-sm text-neutral-300">
+        Switch the map to the{' '}
+        <strong className="text-neutral-100">Second-order exposure</strong> layer to see this:
+        it ignores automation of the job itself and colors purely by these channels — and the
+        map inverts. Software goes calm (its pain is direct, already priced in), while the
+        &ldquo;safe&rdquo; trades and service jobs light up. A job that&rsquo;s green in one
+        layer and red in the other is the map&rsquo;s most important pattern.
       </p>
     </section>
   )

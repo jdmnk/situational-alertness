@@ -1,6 +1,6 @@
 export default function Footer({ meta }) {
   return (
-    <footer className="mt-20 border-t border-neutral-200">
+    <footer className="mt-20 border-t border-neutral-800">
       <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-neutral-500 sm:px-6">
         <p>
           These are <strong>editorial estimates</strong>, not career advice and not predictions.
@@ -8,22 +8,22 @@ export default function Footer({ meta }) {
         </p>
         <p className="mt-3">
           v{meta.version} · updated {meta.updated} ·{' '}
-          <a href="data.json" className="underline underline-offset-2 hover:text-neutral-800">
+          <a href="data.json" className="underline underline-offset-2 hover:text-neutral-200">
             download the data (JSON)
           </a>{' '}
           ·{' '}
           <a
             href="sources.json"
-            className="underline underline-offset-2 hover:text-neutral-800"
+            className="underline underline-offset-2 hover:text-neutral-200"
           >
             sources (JSON)
           </a>{' '}
           ·{' '}
           <a
-            href="https://github.com/jdmnk/situational-alertness"
+            href="https://github.com/jdmnk/situational-readiness"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline underline-offset-2 hover:text-neutral-800"
+            className="underline underline-offset-2 hover:text-neutral-200"
           >
             source on GitHub
           </a>

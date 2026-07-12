@@ -1,14 +1,14 @@
 export default function Methodology() {
   return (
     <section id="methodology" className="mt-16 scroll-mt-4">
-      <details className="group rounded-xl border border-neutral-200 bg-white">
+      <details className="group rounded-xl border border-neutral-800 bg-neutral-900">
         <summary className="cursor-pointer list-none px-5 py-4 font-serif text-2xl font-bold marker:content-none">
           Methodology
           <span className="ml-3 align-middle text-sm font-normal text-neutral-400 group-open:hidden">
             (click to expand — scores are editorial estimates, not measurements)
           </span>
         </summary>
-        <div className="space-y-4 border-t border-neutral-100 px-5 py-5 text-sm leading-relaxed text-neutral-700">
+        <div className="space-y-4 border-t border-neutral-800 px-5 py-5 text-sm leading-relaxed text-neutral-300">
           <p>
             Scores are <strong>editorial estimates, not measurements</strong>. They synthesize
             (a) task-level exposure research (Anthropic Economic Index, Goldman Sachs, IMF),
@@ -47,7 +47,7 @@ export default function Methodology() {
               automation, yet BLS projects roughly flat employment).
             </li>
           </ul>
-          <p className="rounded-lg bg-neutral-50 p-4">
+          <p className="rounded-lg bg-neutral-800/50 p-4">
             <strong>Honest caveats.</strong> Exposure ≠ displacement: the IMF&rsquo;s 60%
             advanced-economy exposure splits roughly half harmed / half augmented. Institutional
             adoption lags lab capability: Amodei&rsquo;s 90%-of-code prediction came true inside

@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { track } from './lib/analytics'
 import { findJob, validateData } from './lib/data'
-import { DEFAULT_STATE, parseHash, serializeHash } from './lib/urlState'
+import { parseHash, serializeHash } from './lib/urlState'
 import Hero from './components/Hero'
-import Controls from './components/Controls'
-import EconomyStrip from './components/EconomyStrip'
-import Board from './components/Board'
+import LayerBar from './components/LayerBar'
+import Treemap from './components/Treemap'
 import DetailPanel from './components/DetailPanel'
 import SecondWave from './components/SecondWave'
 import HowToRead from './components/HowToRead'
@@ -65,92 +64,15 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  const update = useCallback((patch) => setView((v) => ({ ...v, ...patch })), [])
+  const update = useCallback((patch) => {
+    if (patch.layer) track('layer_changed', { layer: patch.layer })
+    setView((v) => ({ ...v, ...patch }))
+  }, [])
 
-  const categories = data?.meta.scoring.categories
-  const allCatKeys = useMemo(() => (categories ? Object.keys(categories) : []), [categories])
-
-  const sortedIndustries = useMemo(() => {
-    if (!data) return []
-    const list = [...data.industries]
-    if (view.sort === 'alpha') list.sort((a, b) => a.name.localeCompare(b.name))
-    else list.sort((a, b) => b.overall_score - a.overall_score)
-    return list
-  }, [data, view.sort])
-
-  const catActive = useCallback(
-    (c) => !view.cats || view.cats.includes(c),
-    [view.cats],
-  )
-  const timeActive = useCallback(
-    (t) => !view.times || view.times.includes(t),
-    [view.times],
-  )
-  const chanActive = useCallback(
-    (c) => !view.chans || view.chans.includes(c),
-    [view.chans],
-  )
-  const isMatch = useCallback(
-    (job) => {
-      if (!catActive(job.category)) return false
-      if (view.chans && !(job.second_order_channels || []).some((c) => view.chans.includes(c)))
-        return false
-      return (
-        timeActive(job.timeline) &&
-        (!view.q || job.name.toLowerCase().includes(view.q.toLowerCase()))
-      )
-    },
-    [catActive, timeActive, view.q, view.chans],
-  )
-
-  const toggleCat = useCallback(
-    (c) => {
-      setView((v) => {
-        const active = new Set(v.cats ?? allCatKeys)
-        active.has(c) ? active.delete(c) : active.add(c)
-        const arr = allCatKeys.filter((k) => active.has(k))
-        return { ...v, cats: arr.length === allCatKeys.length ? null : arr }
-      })
-    },
-    [allCatKeys],
-  )
-
-  const selectJob = useCallback(
-    (jobId, industryId) => {
-      if (jobId) track('job_selected', { job: jobId, industry: industryId })
-      setView((v) => ({
-        ...v,
-        job: jobId,
-        industry: jobId ? (industryId ?? v.industry) : v.industry,
-      }))
-    },
-    [],
-  )
-
-  const focusIndustry = useCallback(
-    (id) => {
-      if (id) track('industry_zoomed', { industry: id })
-      update({ industry: id })
-    },
-    [update],
-  )
-
-  const allChanKeys = useMemo(
-    () => Object.keys(data?.meta.second_order_channels || {}),
-    [data],
-  )
-  const toggleChan = useCallback(
-    (c) => {
-      setView((v) => {
-        const active = new Set(v.chans ?? allChanKeys)
-        active.has(c) ? active.delete(c) : active.add(c)
-        const arr = allChanKeys.filter((k) => active.has(k))
-        return { ...v, chans: arr.length === allChanKeys.length ? null : arr }
-      })
-    },
-    [allChanKeys],
-  )
-
+  const selectJob = useCallback((jobId, industryId) => {
+    if (jobId) track('job_selected', { job: jobId, industry: industryId })
+    setView((v) => ({ ...v, job: jobId }))
+  }, [])
 
   // Close the detail panel with Escape.
   useEffect(() => {
@@ -159,11 +81,16 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [selectJob])
 
+  const isMatch = useCallback(
+    (job) => !view.q || job.name.toLowerCase().includes(view.q.toLowerCase()),
+    [view.q],
+  )
+
   if (error) {
     return (
       <div className="mx-auto max-w-xl px-6 py-24 text-center">
-        <h1 className="text-2xl font-bold">Something broke loading the map</h1>
-        <p className="mt-4 text-neutral-600">{error}</p>
+        <h1 className="text-2xl font-bold text-neutral-100">Something broke loading the map</h1>
+        <p className="mt-4 text-neutral-400">{error}</p>
         <p className="mt-2 text-sm text-neutral-500">
           The dataset lives in <code>data.json</code> — if it was just edited, check its shape.
         </p>
@@ -173,7 +100,7 @@ export default function App() {
 
   if (!data) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-neutral-400">
+      <div className="flex min-h-screen items-center justify-center text-neutral-500">
         Loading the map…
       </div>
     )
@@ -187,42 +114,27 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6">
         <section id="map" className="scroll-mt-4">
-          <div className="sticky top-0 z-30 -mx-4 mb-4 border-b border-neutral-200/70 bg-[#f7f6f3]/90 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
-            <Controls
+          <div className="sticky top-0 z-30 -mx-4 mb-3 border-b border-neutral-800/80 bg-[#101014]/90 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6">
+            <LayerBar
               meta={data.meta}
-              categories={categories}
+              industries={data.industries}
               view={view}
-              catActive={catActive}
-              timeActive={timeActive}
-              chanActive={chanActive}
-              onToggleCat={toggleCat}
-              onToggleChan={toggleChan}
               onUpdate={update}
             />
           </div>
-          {!isMobile && (
-            <EconomyStrip
-              industries={sortedIndustries}
-              meta={data.meta}
-              focusId={view.industry}
-              onJump={focusIndustry}
-            />
-          )}
-          <Board
-            industries={sortedIndustries}
+          <Treemap
+            industries={data.industries}
             meta={data.meta}
-            isMatch={isMatch}
+            layer={view.layer}
             selectedJobId={view.job}
-            focusId={view.industry}
+            isMatch={isMatch}
             onSelectJob={selectJob}
-            onFocus={focusIndustry}
-            revealMatches={view.q.trim().length > 0}
           />
         </section>
 
         <SecondWave meta={data.meta} industries={data.industries} />
         <HowToRead
-          categories={categories}
+          categories={data.meta.scoring.categories}
           meta={data.meta}
           rangeNote={data.meta.scoring.range_note}
         />
@@ -235,7 +147,7 @@ export default function App() {
       {selected && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/25"
+            className="fixed inset-0 z-40 bg-black/50"
             onClick={() => selectJob(null)}
             aria-hidden
           />

@@ -65,19 +65,19 @@ export default function HowToRead({ categories, meta, rangeNote }) {
             </li>
             <li className="flex items-start gap-2.5">
               <span
-                className="mt-0.5 inline-flex h-5 w-14 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
+                className="mt-0.5 inline-flex h-5 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full text-[9px] font-bold"
                 style={{ backgroundColor: '#c0392b', color: '#fff' }}
                 aria-hidden
               >
-                💸🔀
+                worker influx
               </span>
               <span>
-                <strong>Badge</strong> — <em>why, indirectly</em>: green/yellow/red for how hard
-                the second wave hits, icons for the channel:{' '}
+                <strong>Pill under the name</strong> — <em>why, indirectly</em>: green/yellow/red
+                for how hard the second wave hits, spelling out the channels (
                 {Object.values(channels)
-                  .map((c) => `${c.glyph} ${c.label.toLowerCase()}`)
-                  .join(' · ')}
-                .
+                  .map((c) => c.label.toLowerCase())
+                  .join(', ')}
+                — see &ldquo;The second wave&rdquo; below).
               </span>
             </li>
             <li className="flex items-start gap-2.5">

@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react'
 import { categoryForScore, industrySoLevel, textColorFor } from '../lib/data'
 
 // One tile, both dimensions, no clicking required:
-//   background color + score  = direct automation (how much)
-//   small glyphs after score  = the mechanisms (why, direct)
-//   colored right badge       = indirect exposure level + its channels (why, indirect)
+//   background color + score      = direct automation (how much)
+//   small glyphs after score      = the mechanisms (why, direct)
+//   spelled-out pill below the name = indirect exposure level + its channels (why, indirect)
 function JobTile({ job, meta, match, selected, onClick }) {
   const categories = meta.scoring.categories
   const soLevels = meta.scoring.second_order_levels || {}
@@ -29,7 +29,7 @@ function JobTile({ job, meta, match, selected, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="rounded-lg px-3 py-2 text-left text-[13px] font-semibold leading-snug transition hover:brightness-110"
+      className="flex flex-col items-start rounded-lg px-3 py-2 text-left text-[13px] font-semibold leading-snug transition hover:brightness-110"
       style={{
         backgroundColor: color,
         color: fg,
@@ -44,20 +44,24 @@ function JobTile({ job, meta, match, selected, onClick }) {
       title={title}
       aria-label={title + '. Click for details.'}
     >
-      {job.name}
-      <span className="ml-1.5 font-normal opacity-75">{job.score}</span>
-      {job.mechanisms.length > 0 && (
-        <span className="ml-1 font-normal opacity-70" aria-hidden>
-          {job.mechanisms.map((m) => mechs[m]?.glyph ?? '').join('')}
-        </span>
-      )}
+      <span>
+        {job.name}
+        <span className="ml-1.5 font-normal opacity-75">{job.score}</span>
+        {job.mechanisms.length > 0 && (
+          <span className="ml-1 font-normal opacity-70" aria-hidden>
+            {job.mechanisms.map((m) => mechs[m]?.glyph ?? '').join('')}
+          </span>
+        )}
+      </span>
       {showBadge && (
         <span
-          className="ml-1.5 inline-flex translate-y-[-1px] items-center rounded-full px-1.5 py-px align-middle text-[11px] font-semibold"
+          className="mt-1.5 inline-block max-w-full rounded-full px-2 py-0.5 text-[10px] font-semibold leading-tight"
           style={{ backgroundColor: soColor, color: textColorFor(soColor) }}
           aria-hidden
         >
-          {jobChans.length ? jobChans.map((c) => channels[c]?.glyph ?? '').join('') : risk}
+          {jobChans.length
+            ? jobChans.map((c) => channels[c]?.label.toLowerCase() ?? c).join(' · ')
+            : `indirect: ${risk}`}
         </span>
       )}
     </button>

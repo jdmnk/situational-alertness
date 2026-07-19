@@ -26,7 +26,6 @@ function Row({ job, industry, meta, match, selected, onSelect }) {
     (chans.length ? ` via ${waveWords}` : '') +
     (job.confidence === 'low' ? ' · low-confidence score' : '') +
     `. ${job.note}`
-  const name = job.name.split(' (')[0]
   return (
     <button
       className={`rc-row ${match ? '' : 'rc-dim'}`}
@@ -46,7 +45,7 @@ function Row({ job, industry, meta, match, selected, onSelect }) {
         </span>
       </span>
       <span className={`rc-name ${job.confidence === 'low' ? 'rc-lowconf' : ''}`}>
-        {name.length > 26 ? name.slice(0, 25) + '…' : name}
+        {job.name}
       </span>
       <span className="rc-wave">
         <span className="rc-mob-label">second wave</span>

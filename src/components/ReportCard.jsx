@@ -1,10 +1,10 @@
 import { categoryForScore } from '../lib/data'
 
-// The Report Card: one small butterfly chart per industry. Job names down the
-// middle; automation risk grows left (fate-colored, 0-100), the second wave
-// grows right (low/medium/high, colored by level) with its channels written
-// out. Industries sorted worst-hit first, jobs worst-first within each.
-// On narrow screens each row stacks: name, then the two labeled bars.
+// The Report Card: one small chart per industry, one line per job. The name
+// column shows the curated short display name (`short` in data.json); the
+// full name lives in the tooltip and the detail drawer. Automation risk is a
+// fate-colored 0-100 bar; the second wave is a level bar with its channels
+// written out. Industries sorted worst-hit first, jobs worst-first.
 
 const LVL = { low: 0.18, medium: 0.55, high: 0.92 }
 
@@ -28,38 +28,32 @@ function Row({ job, industry, meta, match, selected, onSelect }) {
     `. ${job.note}`
   return (
     <button
-      className={`rc-row ${match ? '' : 'rc-dim'}`}
+      className={`rc-row rc-cols ${match ? '' : 'rc-dim'}`}
       onClick={() => onSelect(job.id, industry.id)}
       title={title}
       aria-label={title}
       style={selected ? { background: '#2b2b36' } : undefined}
     >
-      <span className="rc-auto">
-        <span className="rc-num">{job.score}</span>
-        <span className="rc-mob-label">automation</span>
-        <span className="rc-track">
-          <span
-            className="rc-fill"
-            style={{ width: `${job.score}%`, backgroundColor: categories[job.category].color }}
-          />
-        </span>
-      </span>
       <span className={`rc-name ${job.confidence === 'low' ? 'rc-lowconf' : ''}`}>
-        {job.name}
+        {job.short ?? job.name}
       </span>
-      <span className="rc-wave">
-        <span className="rc-mob-label">second wave</span>
-        <span className="rc-track">
-          <span
-            className="rc-fill"
-            style={{
-              width: `${LVL[job.second_order_risk] * 100}%`,
-              backgroundColor: soLevels[job.second_order_risk]?.color ?? '#999',
-            }}
-          />
-        </span>
-        <span className={`rc-chn ${chans.length ? '' : 'rc-quiet'}`}>{waveWords}</span>
+      <span className="rc-num">{job.score}</span>
+      <span className="rc-track">
+        <span
+          className="rc-fill"
+          style={{ width: `${job.score}%`, backgroundColor: categories[job.category].color }}
+        />
       </span>
+      <span className="rc-track">
+        <span
+          className="rc-fill"
+          style={{
+            width: `${LVL[job.second_order_risk] * 100}%`,
+            backgroundColor: soLevels[job.second_order_risk]?.color ?? '#999',
+          }}
+        />
+      </span>
+      <span className={`rc-chn ${chans.length ? '' : 'rc-quiet'}`}>{waveWords}</span>
     </button>
   )
 }
@@ -85,10 +79,10 @@ export default function ReportCard({ industries, meta, isMatch, selectedJobId, o
                 {ind.overall_score}
               </span>
             </h3>
-            <div className="rc-colhead" aria-hidden>
-              <span className="l">← automation risk</span>
-              <span style={{ textAlign: 'center' }}>job</span>
-              <span>second wave →</span>
+            <div className="rc-cols rc-colhead" aria-hidden>
+              <span>job</span>
+              <span className="h-auto">automation risk</span>
+              <span className="h-wave">second wave</span>
             </div>
             {jobs.map((job) => (
               <Row

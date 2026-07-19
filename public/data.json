@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AI Economic Impact Map",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "updated": "2026-07-11",
     "description": "Hierarchical dataset of industries and occupations with AI impact assessments. Scores are editorial estimates synthesized from cited research (see sources) plus a mechanism-based framework (verification speed, artifact-vs-outcome work, demand-side second-order effects). Intended for a zoomable tree/icicle visualization.",
     "scoring": {
@@ -82,7 +82,8 @@
           "color": "#34495e",
           "label": "Framework judgment, little data"
         }
-      }
+      },
+      "short": "Curated short display name for dense views; `name` remains the full editorial title."
     },
     "mechanisms": {
       "artifact_production": {
@@ -193,7 +194,8 @@
           ],
           "second_order_channels": [
             "pipeline_collapse"
-          ]
+          ],
+          "short": "Junior developer"
         },
         {
           "id": "midlevel-dev",
@@ -211,7 +213,8 @@
           "sources": [
             "aei",
             "goldman-2023"
-          ]
+          ],
+          "short": "Mid-level developer"
         },
         {
           "id": "senior-eng",
@@ -229,7 +232,8 @@
           "sources": [
             "aei",
             "amodei-axios"
-          ]
+          ],
+          "short": "Senior engineer"
         },
         {
           "id": "qa",
@@ -246,7 +250,8 @@
           "note": "Test generation and regression are among the best-automated tasks; role folds into dev or transforms into quality-oversight.",
           "sources": [
             "aei"
-          ]
+          ],
+          "short": "QA / test engineer"
         },
         {
           "id": "devops-sre",
@@ -263,7 +268,8 @@
           "note": "More AI-written code = more production risk = someone senior must own failures. Compresses slower than dev.",
           "sources": [
             "aei"
-          ]
+          ],
+          "short": "DevOps / SRE"
         },
         {
           "id": "security-eng",
@@ -279,7 +285,8 @@
           "note": "Offense gets AI too; agent attack surfaces (prompt injection, exfiltration) create a new discipline with almost no practitioners.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Security engineer"
         },
         {
           "id": "ai-evals",
@@ -297,7 +304,8 @@
           "sources": [
             "framework",
             "aei"
-          ]
+          ],
+          "short": "AI evals engineer"
         },
         {
           "id": "product-manager",
@@ -313,7 +321,8 @@
           "note": "Coordination/status layer evaporates; intent-definition and stakeholder accountability persist. Fewer, more senior PMs.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Product manager"
         },
         {
           "id": "it-support",
@@ -331,7 +340,8 @@
           "sources": [
             "goldman-2023",
             "wef-2025"
-          ]
+          ],
+          "short": "IT support"
         },
         {
           "id": "data-engineer",
@@ -349,7 +359,8 @@
           "sources": [
             "aei",
             "goldman-2023"
-          ]
+          ],
+          "short": "Data engineer (jr)"
         }
       ]
     },
@@ -374,7 +385,8 @@
           "sources": [
             "goldman-2023",
             "sq-2026"
-          ]
+          ],
+          "short": "Paralegal"
         },
         {
           "id": "junior-associate",
@@ -394,7 +406,8 @@
           ],
           "second_order_channels": [
             "pipeline_collapse"
-          ]
+          ],
+          "short": "First-year associate"
         },
         {
           "id": "litigator",
@@ -411,7 +424,8 @@
           "note": "Courts require human representation; persuasion of human judges/juries is human-premium work.",
           "sources": [
             "aei-labor"
-          ]
+          ],
+          "short": "Litigator"
         },
         {
           "id": "compliance-counsel",
@@ -428,7 +442,8 @@
           "note": "AI regulation itself generates demand; someone must sign the filings.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Compliance counsel"
         },
         {
           "id": "notary-judge",
@@ -447,7 +462,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Judges & courts"
         }
       ]
     },
@@ -476,7 +492,8 @@
           ],
           "second_order_channels": [
             "pipeline_collapse"
-          ]
+          ],
+          "short": "Junior analyst"
         },
         {
           "id": "accountant",
@@ -493,7 +510,8 @@
           "sources": [
             "goldman-2023",
             "wef-2025"
-          ]
+          ],
+          "short": "Accountant"
         },
         {
           "id": "auditor",
@@ -510,7 +528,8 @@
           "note": "Audit is legally mandated independence; AI floods increase demand for verification. Fieldwork automates, opinion-signing doesn't.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Auditor"
         },
         {
           "id": "bank-teller",
@@ -526,7 +545,8 @@
           "note": "Among WEF's fastest-declining roles to 2030; continuation of a pre-AI trend, accelerated.",
           "sources": [
             "wef-2025"
-          ]
+          ],
+          "short": "Bank teller"
         },
         {
           "id": "wealth-advisor",
@@ -546,7 +566,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Wealth manager"
         },
         {
           "id": "insurance-claims",
@@ -562,7 +583,8 @@
           "note": "Document-heavy assessment work; complex/contested claims keep humans.",
           "sources": [
             "goldman-2023"
-          ]
+          ],
+          "short": "Claims processor"
         },
         {
           "id": "trader-pm",
@@ -578,7 +600,8 @@
           "note": "Already heavily automated pre-LLM; discretionary layer thins further, accountability seats remain.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Portfolio manager"
         },
         {
           "id": "loan-officer",
@@ -596,7 +619,8 @@
           "sources": [
             "citi-2024",
             "goldman-2023"
-          ]
+          ],
+          "short": "Loan officer"
         }
       ]
     },
@@ -622,7 +646,8 @@
           "sources": [
             "wef-2025",
             "sq-2026"
-          ]
+          ],
+          "short": "Data entry clerk"
         },
         {
           "id": "exec-assistant",
@@ -639,7 +664,8 @@
           "sources": [
             "wef-2025",
             "goldman-2023"
-          ]
+          ],
+          "short": "Executive assistant"
         },
         {
           "id": "customer-service",
@@ -656,7 +682,8 @@
           "sources": [
             "stanford-canaries",
             "wef-2025"
-          ]
+          ],
+          "short": "Customer service"
         },
         {
           "id": "hr-recruiter",
@@ -673,7 +700,8 @@
           "sources": [
             "mit-iceberg",
             "framework"
-          ]
+          ],
+          "short": "HR / recruiter"
         },
         {
           "id": "translator",
@@ -689,7 +717,8 @@
           "note": "Commodity translation solved; residual value in certified/legal/literary niches and live interpretation.",
           "sources": [
             "goldman-2023"
-          ]
+          ],
+          "short": "Translator (text)"
         }
       ]
     },
@@ -714,7 +743,8 @@
           "sources": [
             "goldman-2023",
             "aei"
-          ]
+          ],
+          "short": "Copywriter"
         },
         {
           "id": "graphic-designer",
@@ -730,7 +760,8 @@
           "note": "Production design automates; art direction and brand judgment persist in fewer seats.",
           "sources": [
             "goldman-2023"
-          ]
+          ],
+          "short": "Graphic designer"
         },
         {
           "id": "journalist",
@@ -750,7 +781,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Journalist"
         },
         {
           "id": "video-editor",
@@ -769,7 +801,8 @@
           ],
           "second_order_channels": [
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Video editor"
         },
         {
           "id": "performer",
@@ -789,7 +822,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Live performer"
         },
         {
           "id": "influencer-creator",
@@ -810,7 +844,8 @@
           "second_order_channels": [
             "labor_supply_influx",
             "demand_collapse"
-          ]
+          ],
+          "short": "Creator / influencer"
         },
         {
           "id": "pr-comms",
@@ -827,7 +862,8 @@
           "note": "Writing automates; crisis judgment and journalist relationships persist.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "PR / comms"
         }
       ]
     },
@@ -854,7 +890,8 @@
           "sources": [
             "imf-2024",
             "wef-2025"
-          ]
+          ],
+          "short": "Nurse"
         },
         {
           "id": "physician-diagnostic",
@@ -871,7 +908,8 @@
           "note": "AI reads images superhumanly; liability and certification keep human sign-off. Fewer, more supervisory roles per case volume.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Diagnostic doctor"
         },
         {
           "id": "gp-physician",
@@ -889,7 +927,8 @@
           "note": "Triage/documentation automates (helping, not replacing); examination, trust, and prescription authority stay human.",
           "sources": [
             "imf-2024"
-          ]
+          ],
+          "short": "General practitioner"
         },
         {
           "id": "medical-coder",
@@ -905,7 +944,8 @@
           "note": "Pure document-to-code transformation; among the first healthcare roles to automate.",
           "sources": [
             "kanungo-2026"
-          ]
+          ],
+          "short": "Medical coder"
         },
         {
           "id": "therapist",
@@ -924,7 +964,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Psychotherapist"
         },
         {
           "id": "elder-care",
@@ -945,7 +986,8 @@
           "second_order_channels": [
             "fiscal_squeeze",
             "demand_collapse"
-          ]
+          ],
+          "short": "Elder care worker"
         },
         {
           "id": "pharma-researcher",
@@ -962,7 +1004,8 @@
           "note": "AI accelerates discovery 10x but trials/regulatory keep humans; likely more total research, differently staffed.",
           "sources": [
             "amodei-loving-grace"
-          ]
+          ],
+          "short": "Pharma researcher"
         }
       ]
     },
@@ -991,7 +1034,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "K-12 teacher"
         },
         {
           "id": "university-lecturer",
@@ -1013,7 +1057,8 @@
           "second_order_channels": [
             "pipeline_collapse",
             "demand_collapse"
-          ]
+          ],
+          "short": "University lecturer"
         },
         {
           "id": "tutor",
@@ -1032,7 +1077,8 @@
           ],
           "second_order_channels": [
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Private tutor"
         },
         {
           "id": "corporate-trainer",
@@ -1049,7 +1095,8 @@
           "note": "Reskilling demand explodes (WEF: 59% of workers need training by 2030); delivery partially automates.",
           "sources": [
             "wef-2025"
-          ]
+          ],
+          "short": "Corporate trainer"
         }
       ]
     },
@@ -1079,7 +1126,8 @@
           "second_order_channels": [
             "labor_supply_influx",
             "demand_collapse"
-          ]
+          ],
+          "short": "Electrician"
         },
         {
           "id": "plumber",
@@ -1099,7 +1147,8 @@
           "second_order_channels": [
             "labor_supply_influx",
             "demand_collapse"
-          ]
+          ],
+          "short": "Plumber / HVAC"
         },
         {
           "id": "construction-worker",
@@ -1120,7 +1169,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Construction worker"
         },
         {
           "id": "auto-mechanic",
@@ -1139,7 +1189,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Vehicle mechanic"
         },
         {
           "id": "architect-civil",
@@ -1157,7 +1208,8 @@
           "sources": [
             "goldman-2023",
             "framework"
-          ]
+          ],
+          "short": "Architect / engineer"
         }
       ]
     },
@@ -1182,7 +1234,8 @@
           "note": "Highway autonomy is the tractable part; first/last mile and liability keep humans in the loop longer than the tech suggests.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Long-haul trucker"
         },
         {
           "id": "delivery-courier",
@@ -1202,7 +1255,8 @@
           "second_order_channels": [
             "labor_supply_influx",
             "demand_collapse"
-          ]
+          ],
+          "short": "Delivery courier"
         },
         {
           "id": "warehouse-worker",
@@ -1218,7 +1272,8 @@
           "note": "Structured environment = robotics sweet spot; already deep into automation pre-LLM.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Warehouse worker"
         },
         {
           "id": "logistics-planner",
@@ -1235,7 +1290,8 @@
           "note": "Optimization is what AI does best; oversight seats remain.",
           "sources": [
             "mit-iceberg"
-          ]
+          ],
+          "short": "Logistics planner"
         },
         {
           "id": "pilot",
@@ -1254,7 +1310,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Airline pilot"
         },
         {
           "id": "rideshare-driver",
@@ -1274,7 +1331,8 @@
           ],
           "second_order_channels": [
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Taxi / rideshare"
         }
       ]
     },
@@ -1301,7 +1359,8 @@
             "framework",
             "goldman-2026",
             "eia-2026"
-          ]
+          ],
+          "short": "Grid engineer"
         },
         {
           "id": "power-plant-operator",
@@ -1318,7 +1377,8 @@
           "note": "Generation buildout (solar, storage, nuclear restart) is a decade-scale employment program.",
           "sources": [
             "goldman-2026"
-          ]
+          ],
+          "short": "Renewables tech"
         },
         {
           "id": "datacenter-tech",
@@ -1336,7 +1396,8 @@
           "sources": [
             "goldman-2026",
             "eia-2026"
-          ]
+          ],
+          "short": "Datacenter tech"
         },
         {
           "id": "utility-admin",
@@ -1352,7 +1413,8 @@
           "note": "Same admin automation as everywhere; the sector grows while its office shrinks.",
           "sources": [
             "goldman-2023"
-          ]
+          ],
+          "short": "Utility back-office"
         }
       ]
     },
@@ -1379,7 +1441,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Machine operator"
         },
         {
           "id": "industrial-engineer",
@@ -1396,7 +1459,8 @@
           "note": "Physical-world verification keeps humans; AI compresses the analysis layer.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Industrial engineer"
         },
         {
           "id": "quality-inspector",
@@ -1412,7 +1476,8 @@
           "note": "Vision AI outperforms humans at defect detection; compliance documentation persists as human-signed.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Quality inspector"
         },
         {
           "id": "procurement",
@@ -1428,7 +1493,8 @@
           "note": "MIT Iceberg Index flags logistics/admin as the quiet bulk of exposure.",
           "sources": [
             "mit-iceberg"
-          ]
+          ],
+          "short": "Procurement analyst"
         }
       ]
     },
@@ -1457,7 +1523,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Chef / cook"
         },
         {
           "id": "waiter",
@@ -1478,7 +1545,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Waiter"
         },
         {
           "id": "retail-cashier",
@@ -1497,7 +1565,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Retail cashier"
         },
         {
           "id": "hotel-staff",
@@ -1517,7 +1586,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Hotel staff"
         },
         {
           "id": "barista",
@@ -1538,7 +1608,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Barista"
         },
         {
           "id": "fastfood-counter",
@@ -1560,7 +1631,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Fast-food counter"
         },
         {
           "id": "retail-salesperson",
@@ -1580,7 +1652,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Retail salesperson"
         }
       ]
     },
@@ -1608,7 +1681,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Civil servant (admin)"
         },
         {
           "id": "police-emergency",
@@ -1629,7 +1703,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Police / emergency"
         },
         {
           "id": "regulator-inspector",
@@ -1646,7 +1721,8 @@
           "note": "Every AI harm generates rules; rules generate inspectors. State AI-evaluation capacity is a new hiring category.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Regulator"
         },
         {
           "id": "military",
@@ -1666,7 +1742,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Military personnel"
         },
         {
           "id": "social-worker",
@@ -1687,7 +1764,8 @@
           ],
           "second_order_channels": [
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Social worker"
         }
       ]
     },
@@ -1712,7 +1790,8 @@
           "note": "Owns land (the bottleneck); AI improves yields and margins rather than replacing the owner-operator.",
           "sources": [
             "imf-2024"
-          ]
+          ],
+          "short": "Farmer"
         },
         {
           "id": "farm-laborer",
@@ -1728,7 +1807,8 @@
           "note": "Picking robotics improving but slow; unstructured outdoor work is robotics' hardest case.",
           "sources": [
             "aei-labor"
-          ]
+          ],
+          "short": "Seasonal farmhand"
         }
       ]
     },
@@ -1758,7 +1838,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Hairdresser / barber"
         },
         {
           "id": "personal-trainer",
@@ -1779,7 +1860,8 @@
           "second_order_channels": [
             "demand_collapse",
             "labor_supply_influx"
-          ]
+          ],
+          "short": "Personal trainer"
         },
         {
           "id": "childcare",
@@ -1801,7 +1883,8 @@
           "second_order_channels": [
             "fiscal_squeeze",
             "demand_collapse"
-          ]
+          ],
+          "short": "Childcare worker"
         },
         {
           "id": "massage-physio",
@@ -1822,7 +1905,8 @@
           "second_order_channels": [
             "demand_collapse",
             "fiscal_squeeze"
-          ]
+          ],
+          "short": "Massage / physio"
         },
         {
           "id": "craftsperson",
@@ -1842,7 +1926,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Craftsperson"
         }
       ]
     },
@@ -1866,7 +1951,8 @@
           "note": "Peak demand window now-2028 as every company integrates; commoditizes later as tooling matures - the premium has a half-life.",
           "sources": [
             "aei"
-          ]
+          ],
+          "short": "AI/ML engineer"
         },
         {
           "id": "agent-orchestrator",
@@ -1882,7 +1968,8 @@
           "note": "Anthropic engineers already orchestrate fleets of Claudes - directing agent fleets is the new senior skill across every white-collar domain.",
           "sources": [
             "island-2025"
-          ]
+          ],
+          "short": "Agent orchestrator"
         },
         {
           "id": "ai-auditor",
@@ -1899,7 +1986,8 @@
           "note": "EU AI Act + liability law + insurance = mandatory evidence industry; the audit layer of the AI economy.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "AI auditor"
         },
         {
           "id": "robotics-tech",
@@ -1916,7 +2004,8 @@
           "note": "The physical-AI wave needs installers, maintainers, integrators - the electricians of the robot economy.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Robotics technician"
         },
         {
           "id": "data-curator",
@@ -1932,7 +2021,8 @@
           "note": "Growing now, but synthetic data and automated pipelines compress it - a transitional job category.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Data curation / RLHF"
         },
         {
           "id": "verification-services",
@@ -1948,7 +2038,8 @@
           "note": "Identity, proven-human credentials, content provenance: the consumer trust layer, small now, structural by 2030.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Human verification"
         }
       ]
     },
@@ -1974,7 +2065,8 @@
           "sources": [
             "mit-iceberg",
             "framework"
-          ]
+          ],
+          "short": "Middle manager"
         },
         {
           "id": "management-consultant",
@@ -1992,7 +2084,8 @@
           "sources": [
             "amodei-axios",
             "framework"
-          ]
+          ],
+          "short": "Mgmt consultant"
         },
         {
           "id": "executive",
@@ -2008,7 +2101,8 @@
           "note": "Outcome ownership concentrates; AI multiplies the leverage of whoever holds accountability. Fewer intermediate rungs to get there - the ladder problem moves up.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Executive / P&L"
         }
       ]
     },
@@ -2033,7 +2127,8 @@
           "note": "Personalized outreach at scale is exactly what LLMs do; AI SDRs work the top of funnel while response rates to all outbound collapse - the channel automates and degrades simultaneously.",
           "sources": [
             "framework"
-          ]
+          ],
+          "short": "Sales development"
         },
         {
           "id": "account-exec",
@@ -2052,7 +2147,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Account executive"
         },
         {
           "id": "insurance-agent",
@@ -2070,7 +2166,8 @@
           "sources": [
             "goldman-2023",
             "framework"
-          ]
+          ],
+          "short": "Insurance agent"
         }
       ]
     },
@@ -2098,7 +2195,8 @@
           ],
           "second_order_channels": [
             "demand_collapse"
-          ]
+          ],
+          "short": "Real estate agent"
         },
         {
           "id": "property-manager",
@@ -2118,7 +2216,8 @@
           ],
           "second_order_channels": [
             "office_ecosystem"
-          ]
+          ],
+          "short": "Property manager"
         },
         {
           "id": "janitor-cleaner",
@@ -2139,7 +2238,8 @@
           ],
           "second_order_channels": [
             "office_ecosystem"
-          ]
+          ],
+          "short": "Janitor / cleaner"
         },
         {
           "id": "security-guard",
@@ -2159,7 +2259,8 @@
           ],
           "second_order_channels": [
             "office_ecosystem"
-          ]
+          ],
+          "short": "Security guard"
         }
       ]
     }

@@ -120,8 +120,9 @@ export default function App() {
             />
           </div>
           <p className="rc-readstrip">
-            ← left bar: can AI do the job itself (0–100) · right bar: the second wave — how
-            hard the job is hit indirectly, and through what · industries worst-hit first
+            each row: job · automation risk (0–100, colored by fate) · the second wave (how
+            hard it hits indirectly + through what) · industries worst-hit first · full names
+            on hover and in the detail panel
           </p>
           <ReportCard
             industries={data.industries}

@@ -41,14 +41,19 @@ export default function HowToRead({ categories, meta, rangeNote }) {
           </h3>
           <ul className="mt-3 space-y-2 text-sm text-neutral-300">
             <li>
-              <strong className="text-neutral-100">Left bar</strong> — direct automation risk,
-              0–100, colored by the job&rsquo;s fate. It grows toward the name: the fuller, the
-              more of the job AI can do today or soon.
+              <strong className="text-neutral-100">Automation bar</strong> — direct risk,
+              0–100, colored by the job&rsquo;s fate: the fuller, the more of the job AI can do
+              today or soon.
             </li>
             <li>
-              <strong className="text-neutral-100">Right bar</strong> — the second wave: low,
-              medium or high indirect exposure, with the channel written out next to it.
+              <strong className="text-neutral-100">Second-wave bar</strong> — low, medium or
+              high indirect exposure, with the channel written out next to it.
               &ldquo;Quiet&rdquo; means no meaningful second-wave channel.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Job names</strong> are curated short display
+              names so every row stays one clean line; the full title is on hover and in the
+              detail panel.
             </li>
             <li>
               <strong className="text-neutral-100">Dotted underline</strong> on a name — a

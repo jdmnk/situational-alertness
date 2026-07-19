@@ -40,7 +40,7 @@ body {
   animation: slide-up 220ms ease-out;
 }
 
-/* ── The Report Card (butterfly) ── */
+/* ── The Report Card: one line per job, curated short names ── */
 .rc-grid { columns: 2 460px; column-gap: 14px; }
 .rc-panel { break-inside: avoid; background: #1d1d24; border: 1px solid #2a2a33;
   border-radius: 10px; padding: 13px 16px; margin: 0 0 14px; transition: opacity .25s; }
@@ -48,53 +48,37 @@ body {
 .rc-panel h3 { margin: 0 0 4px; font-size: 13.5px; color: #e8e6e1; display: flex;
   justify-content: space-between; align-items: baseline; gap: 8px; font-weight: 700; }
 .rc-os { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; }
-.rc-colhead { display: grid; grid-template-columns: 1fr 200px 1fr; gap: 10px;
-  font-family: ui-monospace, Menlo, monospace; font-size: 9px; letter-spacing: .08em;
+.rc-cols { display: grid; grid-template-columns: minmax(150px, 1.35fr) 22px minmax(60px, 0.9fr) 44px minmax(84px, 1fr);
+  gap: 7px; align-items: center; }
+.rc-colhead { font-family: ui-monospace, Menlo, monospace; font-size: 9px; letter-spacing: .08em;
   text-transform: uppercase; color: #6d6b64; margin: 6px 0 4px; }
-.rc-colhead .l { text-align: right; }
-.rc-row { display: grid; grid-template-columns: 1fr 200px 1fr; gap: 10px; align-items: center;
-  min-height: 42px; padding: 2px 0; width: 100%; background: none; border: none; text-align: inherit;
-  cursor: pointer; border-radius: 6px; transition: opacity .25s, background .15s;
-  font: inherit; color: inherit; }
+.rc-colhead .h-auto { grid-column: 2 / span 2; }
+.rc-colhead .h-wave { grid-column: 4 / span 2; }
+.rc-row { min-height: 28px; padding: 2px 0; width: 100%; background: none; border: none;
+  text-align: inherit; cursor: pointer; border-radius: 6px;
+  transition: opacity .25s, background .15s; font: inherit; color: inherit; }
 .rc-row:hover { background: #24242e; }
 .rc-row:focus-visible { outline: 2px solid #e8e6e1; outline-offset: 1px; }
 .rc-row.rc-dim { opacity: 0.22; }
-.rc-name { font-size: 11.5px; color: #e8e6e1; font-weight: 600; text-align: center;
-  line-height: 1.25; overflow: hidden; display: -webkit-box;
-  -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.rc-name { font-size: 11.5px; color: #e8e6e1; font-weight: 600; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; }
 .rc-name.rc-lowconf { text-decoration: underline dotted rgba(232,230,225,.5);
   text-underline-offset: 3px; }
-.rc-auto { display: flex; justify-content: flex-end; align-items: center; gap: 6px; min-width: 0; }
 .rc-num { font-family: ui-monospace, Menlo, monospace; font-size: 10px; color: #6d6b64;
-  font-variant-numeric: tabular-nums; flex: none; }
-.rc-track { height: 9px; background: #24242c; border-radius: 5px; overflow: hidden; flex: none; }
-.rc-auto .rc-track { width: 100%; max-width: 210px; flex: 1; }
-.rc-fill { height: 100%; display: block; border-radius: 5px; }
-.rc-auto .rc-fill { margin-left: auto; }
-.rc-wave { display: flex; align-items: center; gap: 6px; min-width: 0; }
-.rc-wave .rc-track { width: 56px; }
-.rc-chn { font-size: 10px; color: #e6b33d; min-width: 0; line-height: 1.22;
+  font-variant-numeric: tabular-nums; text-align: right; }
+.rc-track { height: 8px; background: #24242c; border-radius: 4px; overflow: hidden; }
+.rc-fill { height: 100%; display: block; border-radius: 4px; }
+.rc-chn { font-size: 10px; color: #e6b33d; min-width: 0; line-height: 1.2;
   overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; }
+  -webkit-line-clamp: 2; }
 .rc-chn.rc-quiet { color: #6d6b64; }
 .rc-readstrip { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px;
   color: #6d6b64; letter-spacing: .03em; margin: 2px 0 12px; }
-.rc-mob-label { display: none; }
 
 @media (max-width: 700px) {
   .rc-grid { columns: 1; }
-  .rc-colhead { display: none; }
-  .rc-row { grid-template-columns: 1fr; gap: 3px; padding: 7px 0; min-height: 79px;
-    align-content: start;
-    border-bottom: 1px solid #21212a; border-radius: 0; }
-  .rc-row:last-child { border-bottom: none; }
-  .rc-name { text-align: left; order: -1; font-size: 12px; -webkit-line-clamp: 2;
-    min-height: 30px; }
-  .rc-auto { justify-content: flex-start; }
-  .rc-auto .rc-fill { margin-left: 0; }
-  .rc-auto .rc-track { max-width: none; }
-  .rc-mob-label { display: inline; font-family: ui-monospace, Menlo, monospace;
-    font-size: 8.5px; letter-spacing: .06em; text-transform: uppercase; color: #6d6b64;
-    width: 74px; flex: none; }
-  .rc-wave .rc-track { flex: none; }
+  .rc-cols { grid-template-columns: minmax(128px, 1.5fr) 18px minmax(44px, 1fr) 32px minmax(56px, 0.9fr);
+    gap: 4px; }
+  .rc-name { font-size: 11px; }
+  .rc-chn { font-size: 9.5px; }
 }

@@ -1,5 +1,4 @@
 import { textColorFor } from '../lib/data'
-import { LAYERS } from '../lib/layers'
 
 const FATE_LINES = {
   displaced: 'most of the job’s current economic value is at risk of AI substitution.',
@@ -7,16 +6,6 @@ const FATE_LINES = {
   pressured: 'safe from automation itself, but squeezed by second-order and demand-side effects.',
   insulated: 'protected — for now — by physical work, human premium, or accountability rules.',
   growing: 'demand for this work is created or expanded by AI.',
-}
-
-const LAYER_LINES = {
-  fate: 'the default view — the five fates above.',
-  indirect:
-    'ignores automation of the job itself and colors purely by second-wave exposure — the “safe” trades and service jobs light up.',
-  timeline:
-    'when the main effect becomes clearly visible in employment or wages — red = already here.',
-  confidence:
-    'how well-supported each score is — the honesty layer. Bright = data, dark = framework judgment.',
 }
 
 export default function HowToRead({ categories, meta, rangeNote }) {
@@ -48,19 +37,29 @@ export default function HowToRead({ categories, meta, rangeNote }) {
           {rangeNote && <p className="mt-2 text-xs text-neutral-500">{rangeNote}</p>}
 
           <h3 className="mt-6 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            The layers
+            Each row
           </h3>
           <ul className="mt-3 space-y-2 text-sm text-neutral-300">
-            {Object.entries(LAYERS).map(([key, layer]) => (
-              <li key={key}>
-                <strong className="text-neutral-100">{layer.label}</strong> — {LAYER_LINES[key]}
-              </li>
-            ))}
+            <li>
+              <strong className="text-neutral-100">Left bar</strong> — direct automation risk,
+              0–100, colored by the job&rsquo;s fate. It grows toward the name: the fuller, the
+              more of the job AI can do today or soon.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Right bar</strong> — the second wave: low,
+              medium or high indirect exposure, with the channel written out next to it.
+              &ldquo;Quiet&rdquo; means no meaningful second-wave channel.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Dotted underline</strong> on a name — a
+              low-confidence score: framework extrapolation, not data.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Sorting</strong> — industries worst-hit
+              first, jobs worst-first within each; the panel number is the industry&rsquo;s
+              overall score.
+            </li>
           </ul>
-          <p className="mt-3 text-xs text-neutral-500">
-            A dotted cell border marks a low-confidence score (extrapolation, not data),
-            whatever the active layer.
-          </p>
         </div>
 
         <div>
@@ -85,12 +84,12 @@ export default function HowToRead({ categories, meta, rangeNote }) {
             </li>
             <li>
               <strong className="text-neutral-100">
-                The second-order layer is the second-wave story.
+                The right-hand bars are the second-wave story.
               </strong>{' '}
               A job can be automation-proof while its customers, colleagues-to-be, or funders
               are automation-exposed. A barista&rsquo;s risk isn&rsquo;t a robot — it&rsquo;s a
-              neighborhood that can no longer afford coffee. Green in one layer, red in the
-              other: the map&rsquo;s most important pattern.
+              neighborhood that can no longer afford coffee. An empty left bar next to a full
+              right bar is the map&rsquo;s most important pattern.
             </li>
           </ol>
         </div>

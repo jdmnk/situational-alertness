@@ -3,8 +3,8 @@ import { track } from './lib/analytics'
 import { findJob, validateData } from './lib/data'
 import { parseHash, serializeHash } from './lib/urlState'
 import Hero from './components/Hero'
-import LayerBar from './components/LayerBar'
-import Treemap from './components/Treemap'
+import Controls from './components/Controls'
+import ReportCard from './components/ReportCard'
 import DetailPanel from './components/DetailPanel'
 import SecondWave from './components/SecondWave'
 import HowToRead from './components/HowToRead'
@@ -64,10 +64,7 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  const update = useCallback((patch) => {
-    if (patch.layer) track('layer_changed', { layer: patch.layer })
-    setView((v) => ({ ...v, ...patch }))
-  }, [])
+  const update = useCallback((patch) => setView((v) => ({ ...v, ...patch })), [])
 
   const selectJob = useCallback((jobId, industryId) => {
     if (jobId) track('job_selected', { job: jobId, industry: industryId })
@@ -114,20 +111,23 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6">
         <section id="map" className="scroll-mt-4">
-          <div className="sticky top-0 z-30 -mx-4 mb-3 border-b border-neutral-800/80 bg-[#101014]/90 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6">
-            <LayerBar
+          <div className="sticky top-0 z-30 -mx-4 mb-2 border-b border-neutral-800/80 bg-[#101014]/90 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6">
+            <Controls
               meta={data.meta}
               industries={data.industries}
               view={view}
               onUpdate={update}
             />
           </div>
-          <Treemap
+          <p className="rc-readstrip">
+            ← left bar: can AI do the job itself (0–100) · right bar: the second wave — how
+            hard the job is hit indirectly, and through what · industries worst-hit first
+          </p>
+          <ReportCard
             industries={data.industries}
             meta={data.meta}
-            layer={view.layer}
-            selectedJobId={view.job}
             isMatch={isMatch}
+            selectedJobId={view.job}
             onSelectJob={selectJob}
           />
         </section>

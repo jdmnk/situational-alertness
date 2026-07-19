@@ -17,17 +17,15 @@ export default function Hero({ meta, industries }) {
       <p className="mt-5 max-w-4xl text-[15px] leading-relaxed text-neutral-400">
         An editorial map of <strong className="text-neutral-200">{jobCount} occupations</strong>{' '}
         across <strong className="text-neutral-200">{industries.length} industries</strong>,
-        scored for how AI reshapes them. Each <strong className="text-neutral-200">cell</strong>{' '}
-        is a job, grouped into industry blocks.{' '}
-        <strong className="text-neutral-200">Color</strong> shows the selected layer — the
-        job&rsquo;s <strong className="text-neutral-200">automation fate</strong> (displaced /
-        transformed / pressured / insulated / growing),{' '}
-        <strong className="text-neutral-200">second-order exposure</strong> (hit through
-        customers losing income, displaced workers flooding in, tax-base erosion, or emptying
-        offices — not through automation itself),{' '}
-        <strong className="text-neutral-200">timeline</strong>, or{' '}
-        <strong className="text-neutral-200">confidence</strong>. Click any cell for the
-        reasoning, mechanisms, and sources.
+        scored for how AI reshapes them. Each industry is a small chart; each job is one row
+        with two bars. The <strong className="text-neutral-200">left bar</strong> is direct
+        automation risk — can AI do the job itself — colored by fate (displaced / transformed /
+        pressured / insulated / growing). The <strong className="text-neutral-200">right
+        bar</strong> is the <strong className="text-neutral-200">second wave</strong>: how hard
+        the job gets hit indirectly, with the channel written next to it — customers losing
+        income, displaced workers flooding in, tax-base erosion, emptying offices, collapsing
+        career ladders. Left-heavy industries are first-wave stories; right-heavy industries
+        are second-wave stories. Click any row for the reasoning, mechanisms, and sources.
       </p>
 
       <p className="mt-4 max-w-4xl text-[15px] leading-relaxed text-neutral-400">

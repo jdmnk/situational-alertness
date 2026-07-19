@@ -12,10 +12,10 @@ measurements — see the Methodology section on the site.
 
 ## Stack
 
-- React; the map is "The Living Tree" — a custom SVG tree where boughs are
-  industries (thickness ∝ jobs mapped), the open bough carries its jobs as
-  readable leaf cards colored by fate, and the second-order channels are
-  drawn as roots below the ground line that light up per job
+- React + d3-hierarchy; the map is a dark, full-width squarified treemap
+  (industry blocks containing job cells, area ∝ jobs mapped) with color
+  "layers" toggling between automation fate, second-order exposure, timeline,
+  and confidence — inspired by karpathy.ai/jobs
 - Tailwind CSS 4, Vite
 - Static — no backend; anonymous, cookieless analytics via PostHog EU
 

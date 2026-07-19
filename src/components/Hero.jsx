@@ -17,14 +17,17 @@ export default function Hero({ meta, industries }) {
       <p className="mt-5 max-w-4xl text-[15px] leading-relaxed text-neutral-400">
         An editorial map of <strong className="text-neutral-200">{jobCount} occupations</strong>{' '}
         across <strong className="text-neutral-200">{industries.length} industries</strong>,
-        scored for how AI reshapes them — drawn as a tree.{' '}
-        <strong className="text-neutral-200">Boughs</strong> are industries; open one and its
-        jobs unfold as <strong className="text-neutral-200">leaves</strong>, colored by fate
-        (displaced / transformed / pressured / insulated / growing). Below the ground line, the{' '}
-        <strong className="text-neutral-200">roots</strong> are the second wave — the channels
-        that hit jobs automation can&rsquo;t touch: customers losing income, displaced workers
-        flooding in, tax-base erosion, emptying offices. Hover a leaf and its roots light up.
-        Click any leaf for the reasoning, mechanisms, and sources.
+        scored for how AI reshapes them. Each <strong className="text-neutral-200">cell</strong>{' '}
+        is a job, grouped into industry blocks.{' '}
+        <strong className="text-neutral-200">Color</strong> shows the selected layer — the
+        job&rsquo;s <strong className="text-neutral-200">automation fate</strong> (displaced /
+        transformed / pressured / insulated / growing),{' '}
+        <strong className="text-neutral-200">second-order exposure</strong> (hit through
+        customers losing income, displaced workers flooding in, tax-base erosion, or emptying
+        offices — not through automation itself),{' '}
+        <strong className="text-neutral-200">timeline</strong>, or{' '}
+        <strong className="text-neutral-200">confidence</strong>. Click any cell for the
+        reasoning, mechanisms, and sources.
       </p>
 
       <p className="mt-4 max-w-4xl text-[15px] leading-relaxed text-neutral-400">

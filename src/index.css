@@ -84,10 +84,12 @@ body {
 @media (max-width: 700px) {
   .rc-grid { columns: 1; }
   .rc-colhead { display: none; }
-  .rc-row { grid-template-columns: 1fr; gap: 3px; padding: 7px 0; min-height: 0;
+  .rc-row { grid-template-columns: 1fr; gap: 3px; padding: 7px 0; min-height: 79px;
+    align-content: start;
     border-bottom: 1px solid #21212a; border-radius: 0; }
   .rc-row:last-child { border-bottom: none; }
-  .rc-name { text-align: left; order: -1; font-size: 12px; -webkit-line-clamp: unset; }
+  .rc-name { text-align: left; order: -1; font-size: 12px; -webkit-line-clamp: 2;
+    min-height: 30px; }
   .rc-auto { justify-content: flex-start; }
   .rc-auto .rc-fill { margin-left: 0; }
   .rc-auto .rc-track { max-width: none; }

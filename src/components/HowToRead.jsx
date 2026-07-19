@@ -1,5 +1,4 @@
 import { textColorFor } from '../lib/data'
-import { LAYERS } from '../lib/layers'
 
 const FATE_LINES = {
   displaced: 'most of the job’s current economic value is at risk of AI substitution.',
@@ -7,16 +6,6 @@ const FATE_LINES = {
   pressured: 'safe from automation itself, but squeezed by second-order and demand-side effects.',
   insulated: 'protected — for now — by physical work, human premium, or accountability rules.',
   growing: 'demand for this work is created or expanded by AI.',
-}
-
-const LAYER_LINES = {
-  fate: 'the default view — the five fates above.',
-  indirect:
-    'ignores automation of the job itself and colors purely by second-wave exposure — the “safe” trades and service jobs light up.',
-  timeline:
-    'when the main effect becomes clearly visible in employment or wages — red = already here.',
-  confidence:
-    'how well-supported each score is — the honesty layer. Bright = data, dark = framework judgment.',
 }
 
 export default function HowToRead({ categories, meta, rangeNote }) {
@@ -48,19 +37,25 @@ export default function HowToRead({ categories, meta, rangeNote }) {
           {rangeNote && <p className="mt-2 text-xs text-neutral-500">{rangeNote}</p>}
 
           <h3 className="mt-6 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            The layers
+            The tree
           </h3>
           <ul className="mt-3 space-y-2 text-sm text-neutral-300">
-            {Object.entries(LAYERS).map(([key, layer]) => (
-              <li key={key}>
-                <strong className="text-neutral-100">{layer.label}</strong> — {LAYER_LINES[key]}
-              </li>
-            ))}
+            <li>
+              <strong className="text-neutral-100">Boughs</strong> — industries; thickness is the
+              number of jobs mapped, the colored number is the industry&rsquo;s overall score.
+              One bough open at a time.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Leaves</strong> — jobs, colored by fate, with
+              score and second-wave channels written on the leaf. Dotted edge = low-confidence
+              score. Click for reasoning and sources.
+            </li>
+            <li>
+              <strong className="text-neutral-100">Roots</strong> — the second wave. Each root is
+              one channel, thick in proportion to the jobs it reaches. Hover a leaf to light the
+              roots that feed on it; hover a root to see which leaves it touches.
+            </li>
           </ul>
-          <p className="mt-3 text-xs text-neutral-500">
-            A dotted cell border marks a low-confidence score (extrapolation, not data),
-            whatever the active layer.
-          </p>
         </div>
 
         <div>
@@ -85,12 +80,12 @@ export default function HowToRead({ categories, meta, rangeNote }) {
             </li>
             <li>
               <strong className="text-neutral-100">
-                The second-order layer is the second-wave story.
+                The roots are the second-wave story.
               </strong>{' '}
               A job can be automation-proof while its customers, colleagues-to-be, or funders
               are automation-exposed. A barista&rsquo;s risk isn&rsquo;t a robot — it&rsquo;s a
-              neighborhood that can no longer afford coffee. Green in one layer, red in the
-              other: the map&rsquo;s most important pattern.
+              neighborhood that can no longer afford coffee. A green leaf with glowing roots:
+              the map&rsquo;s most important pattern.
             </li>
           </ol>
         </div>

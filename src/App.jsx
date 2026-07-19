@@ -3,8 +3,8 @@ import { track } from './lib/analytics'
 import { findJob, validateData } from './lib/data'
 import { parseHash, serializeHash } from './lib/urlState'
 import Hero from './components/Hero'
-import LayerBar from './components/LayerBar'
-import Treemap from './components/Treemap'
+import TreeControls from './components/TreeControls'
+import LivingTree from './components/LivingTree'
 import DetailPanel from './components/DetailPanel'
 import SecondWave from './components/SecondWave'
 import HowToRead from './components/HowToRead'
@@ -64,14 +64,20 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  const update = useCallback((patch) => {
-    if (patch.layer) track('layer_changed', { layer: patch.layer })
-    setView((v) => ({ ...v, ...patch }))
-  }, [])
+  const update = useCallback((patch) => setView((v) => ({ ...v, ...patch })), [])
 
   const selectJob = useCallback((jobId, industryId) => {
     if (jobId) track('job_selected', { job: jobId, industry: industryId })
-    setView((v) => ({ ...v, job: jobId }))
+    setView((v) => ({
+      ...v,
+      job: jobId,
+      industry: jobId ? (industryId ?? v.industry) : v.industry,
+    }))
+  }, [])
+
+  const focusIndustry = useCallback((id) => {
+    if (id) track('industry_zoomed', { industry: id })
+    setView((v) => ({ ...v, industry: v.industry === id ? null : id }))
   }, [])
 
   // Close the detail panel with Escape.
@@ -114,22 +120,28 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6">
         <section id="map" className="scroll-mt-4">
-          <div className="sticky top-0 z-30 -mx-4 mb-3 border-b border-neutral-800/80 bg-[#101014]/90 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6">
-            <LayerBar
+          <div className="sticky top-0 z-30 -mx-4 mb-1 border-b border-neutral-800/80 bg-[#101014]/90 px-4 py-2.5 backdrop-blur sm:-mx-6 sm:px-6">
+            <TreeControls
               meta={data.meta}
               industries={data.industries}
               view={view}
               onUpdate={update}
             />
           </div>
-          <Treemap
-            industries={data.industries}
-            meta={data.meta}
-            layer={view.layer}
-            selectedJobId={view.job}
-            isMatch={isMatch}
-            onSelectJob={selectJob}
-          />
+          <div className="overflow-x-auto">
+            <div className="min-w-[980px]">
+              <LivingTree
+                industries={data.industries}
+                meta={data.meta}
+                focusId={view.industry}
+                selectedJobId={view.job}
+                isMatch={isMatch}
+                q={view.q}
+                onFocus={focusIndustry}
+                onSelectJob={selectJob}
+              />
+            </div>
+          </div>
         </section>
 
         <SecondWave meta={data.meta} industries={data.industries} />

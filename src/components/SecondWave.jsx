@@ -63,12 +63,11 @@ export default function SecondWave({ meta, industries }) {
       </div>
 
       <p className="mt-5 max-w-3xl text-sm text-neutral-300">
-        Switch the map to the{' '}
-        <strong className="text-neutral-100">Second-order exposure</strong> layer to see this:
-        it ignores automation of the job itself and colors purely by these channels — and the
-        map inverts. Software goes calm (its pain is direct, already priced in), while the
-        &ldquo;safe&rdquo; trades and service jobs light up. A job that&rsquo;s green in one
-        layer and red in the other is the map&rsquo;s most important pattern.
+        The tree draws this literally: the <strong className="text-neutral-100">roots</strong>{' '}
+        under the trunk are these five channels, thick in proportion to the jobs they reach.
+        Hover any leaf and the roots that feed on it light up — a green leaf with glowing roots
+        is the map&rsquo;s most important pattern: safe from the robots, fed on by everything
+        downstream of them.
       </p>
     </section>
   )

@@ -4,7 +4,8 @@ import { categoryForScore } from '../lib/data'
 // column shows the curated short display name (`short` in data.json); the
 // full name lives in the tooltip and the detail drawer. Automation risk is a
 // fate-colored 0-100 bar; the second wave is a level bar with its channels
-// written out. Industries sorted worst-hit first, jobs worst-first.
+// written out. Rows without a material channel show an empty bar and an em
+// dash. Industries sorted worst-hit first, jobs worst-first.
 
 const LVL = { low: 0.18, medium: 0.55, high: 0.92 }
 
@@ -17,13 +18,13 @@ function Row({ job, industry, meta, match, selected, onSelect }) {
   const chans = job.second_order_channels || []
   const waveWords = chans.length
     ? chans.map((c) => channels[c]?.label.toLowerCase() ?? c).join(' · ')
-    : job.second_order_risk === 'low'
-      ? 'quiet'
-      : job.second_order_risk
+    : '—'
+  const secondWaveDescription = chans.length
+    ? `second wave ${job.second_order_risk} via ${waveWords}`
+    : 'no material second-wave channel identified'
   const title =
     `${job.name} — automation ${job.score} (${categories[job.category].label}), ` +
-    `second wave ${job.second_order_risk}` +
-    (chans.length ? ` via ${waveWords}` : '') +
+    secondWaveDescription +
     (job.confidence === 'low' ? ' · low-confidence score' : '') +
     `. ${job.note}`
   return (
@@ -48,7 +49,7 @@ function Row({ job, industry, meta, match, selected, onSelect }) {
         <span
           className="rc-fill"
           style={{
-            width: `${LVL[job.second_order_risk] * 100}%`,
+            width: chans.length ? `${LVL[job.second_order_risk] * 100}%` : 0,
             backgroundColor: soLevels[job.second_order_risk]?.color ?? '#999',
           }}
         />

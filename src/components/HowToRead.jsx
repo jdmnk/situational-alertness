@@ -48,7 +48,8 @@ export default function HowToRead({ categories, meta, rangeNote }) {
             <li>
               <strong className="text-neutral-100">Second-wave bar</strong> — low, medium or
               high indirect exposure, with the channel written out next to it.
-              &ldquo;Quiet&rdquo; means no meaningful second-wave channel.
+              An empty bar and &ldquo;—&rdquo; mean no material second-wave channel was
+              identified.
             </li>
             <li>
               <strong className="text-neutral-100">Job names</strong> are curated short display
